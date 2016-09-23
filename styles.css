@@ -6,7 +6,11 @@ img
 body
 {
     text-align: center;
-    font-family: fantasy;
-    font-style: oblique;
+    font-family: Times;
+    font-style: normal;
+    font-variant: small-caps;
+    font-size: x-large;
+    color: rgb(20,30,190);
 }
+
 
