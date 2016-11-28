@@ -3,6 +3,18 @@ img
     width: 300px;
 }
 
+.navigation a {
+background-color: #3393FF;
+    color: white;
+  text-align: center;
+    display: inline-block;
+    font-size: small;
+    font-family: Times;
+width: 12%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
 body
 {
     text-align: center;
@@ -10,7 +22,23 @@ body
     font-style: normal;
     font-variant: small-caps;
     font-size: x-large;
-    color: rgb(20,50,230);
+    color: #3393FF;
+}
+
+body2
+{
+    font-size: x-large;
+    color: black;
+}
+
+body3
+{
+    text-align: center;
+    font-family: Times;
+    font-style: normal;
+    font-variant: small-caps;
+    font-size: x-large;
+    color: #3393FF;
 }
 
 
