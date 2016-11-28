@@ -10,6 +10,7 @@ background-color: #3393FF;
     display: inline-block;
     font-size: small;
     font-family: Times;
+    text-decoration: none;
 width: 12%;
 	padding-top: 5px;
 	padding-bottom: 5px;
@@ -23,6 +24,10 @@ body
     font-variant: small-caps;
     font-size: x-large;
     color: #3393FF;
+}
+
+body a{
+    text-decoration: none;
 }
 
 body2
