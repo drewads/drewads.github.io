@@ -3,17 +3,24 @@ img
     width: 300px;
 }
 
-.navigation a {
-background-color: #3393FF;
-    color: white;
+.navigation a 
+{
+    color: #3393FF;
   text-align: center;
     display: inline-block;
     font-size: small;
     font-family: Times;
-    text-decoration: none;
-width: 12%;
-	padding-top: 5px;
-	padding-bottom: 5px;
+width: 40%;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	margin-right: 40%;
+}
+
+.rect 
+{
+    background-color: gray;
+    width: 100%;
+    height: 2px;
 }
 
 body
@@ -30,20 +37,17 @@ body a{
     text-decoration: none;
 }
 
-body2
-{
-    font-size: x-large;
-    color: black;
-}
-
-body3
+.copyRight
 {
     text-align: center;
     font-family: Times;
-    font-style: normal;
-    font-variant: small-caps;
-    font-size: x-large;
-    color: #3393FF;
+    color: black;
+    font-size: small;
+}
+
+.describe
+{
+    color: black;
 }
 
 
