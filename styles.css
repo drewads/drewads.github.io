@@ -51,4 +51,8 @@ body a{
     color: gray;
 }
 
-
+.filler
+{
+    color: black;
+    font-size: medium;
+}
