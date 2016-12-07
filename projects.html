@@ -14,7 +14,7 @@
     </head>
     <body>
         <div class=navigation>
-        <pre> <a href="index.html" target="_blank">Drew Wadsworth</a> <a href="projects.html" target="_blank">Projects</a> <a href="about.html" target="_blank">About</a> </a>
+        <pre> <a onclick = "assign(1)" target="_blank">Drew Wadsworth</a> <a onclick = "assign(2)" target="_blank">Projects</a> <a onclick = "assign(3)" target="_blank">About</a> </a>
         </pre>
         </div>
         <br>
@@ -56,3 +56,24 @@
         <div class = "copyRight">
                 Copyright © 2016 Drew Wadsworth. All rights reserved.
         </div>
+        <script>
+        function assign(numUrl)
+        {
+        let url1 = "index.html";
+        let url2 = "projects.html";
+        let url3 = "about.html";
+        if (numUrl == 1)
+        {
+            /*global location*/location.assign(url1);
+        }
+        else if (numUrl == 2)
+        {
+            /*global location*/location.assign(url2);
+        }
+        else if (numUrl == 3)
+        {
+            /*global location*/location.assign(url3);
+        }
+        }
+        </script>
+    </body>    
