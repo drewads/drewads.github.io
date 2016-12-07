@@ -10,11 +10,11 @@
         }
         </style>
         <title> Drew Wadsworth - Projects </title>
-        <link rel= "stylesheet" href= "styles.css" />
+        <link rel= "stylesheet" href= "styles.css"/>
     </head>
     <body>
         <div class=navigation>
-        <pre> <a onclick = "assign(1)" target="_blank">Drew Wadsworth</a> <a onclick = "assign(2)" target="_blank">Projects</a> <a onclick = "assign(3)" target="_blank">About</a> </a>
+        <pre> <a href = "index.html">Drew Wadsworth</a> <a href = "projects.html">Projects</a> <a href = "about.html">About</a> </a>
         </pre>
         </div>
         <br>
@@ -26,7 +26,7 @@
         <br>
         <div class = describe>Projects</div>
         <br>
-        <a href = https://github.com/drewads>
+        <a href = https://github.com/drewads target="_blank">
             Click for my github
             <br>
             (@drewads)
@@ -56,24 +56,4 @@
         <div class = "copyRight">
                 Copyright © 2016 Drew Wadsworth. All rights reserved.
         </div>
-        <script>
-        function assign(numUrl)
-        {
-        let url1 = "index.html";
-        let url2 = "projects.html";
-        let url3 = "about.html";
-        if (numUrl == 1)
-        {
-            /*global location*/location.assign(url1);
-        }
-        else if (numUrl == 2)
-        {
-            /*global location*/location.assign(url2);
-        }
-        else if (numUrl == 3)
-        {
-            /*global location*/location.assign(url3);
-        }
-        }
-        </script>
     </body>    

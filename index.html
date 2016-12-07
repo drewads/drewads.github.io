@@ -14,7 +14,7 @@
     </head>
     <body>
         <div class=navigation>
-        <pre> <a onclick = "assign(1)" target="_blank">Drew Wadsworth</a> <a onclick="assign(2)" target="_blank">Projects</a> <a onclick = "assign(3)" target="_blank">About</a> </a>
+        <pre> <a href = "index.html">Drew Wadsworth</a> <a href = "projects.html">Projects</a> <a href = "about.html">About</a> </a>
         </pre>
         </div>
         <br>
@@ -26,18 +26,18 @@
         <br>
         <div class = hello>The Website of Drew Wadsworth</div>
         <br>
-        <a href="https://www.menloschool.org/">
+        <a href="https://www.menloschool.org/" target="_blank">
         <img src = MenloLogo.jpg>
         </a>
-        <a href= "https://www.menloschool.org/">
+        <a href= "https://www.menloschool.org/" target="_blank">
         <p>This is where I go to school</p>
         </a>
         <h5>This is a cool rocket</h5>
-        <a href="http://spaceflightnow.com/">
+        <a href="http://spaceflightnow.com/" target="_blank">
             <img src= Falcon9.jpg>
         </a>
         <p>If you would like to see recent space news, click on the image.</p>
-        <a href="https://workshops.hackclub.com/personal_website/">
+        <a href="https://workshops.hackclub.com/personal_website/" target="_blank">
         <br>
         <p>
             To change stuff, click here.    
@@ -50,25 +50,5 @@
                 Copyright © 2016 Drew Wadsworth. All rights reserved.
             </h6>
         </div>
-        <script>
-        function assign(numUrl)
-        {
-        let url1 = "index.html";
-        let url2 = "projects.html";
-        let url3 = "about.html";
-        if (numUrl == 1)
-        {
-            /*global location*/location.assign(url1);
-        }
-        else if (numUrl == 2)
-        {
-            /*global location*/location.assign(url2);
-        }
-        else if (numUrl == 3)
-        {
-            /*global location*/location.assign(url3);
-        }
-        }
-        </script>
     </body>
 </html>
