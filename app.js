@@ -54,21 +54,19 @@ function getTime()
 function loadWeather() {
   var weather = "weather";
   var url = "https://api.forecast.io/forecast/"; // Dark Sky API url
-  var apiKey = "YOUR API KEY"; // API key from Dark Sky
+  var apiKey = "f417f17969571f97cf5e00a5ef052376"; // API key from Dark Sky
 
   function success(position) {
     var latitude = position.coords.latitude; // latitude using geolocation
     var longitude = position.coords.longitude; // longitude using geolocation
-    
-    alert(latitude, longitude);
 
     // API request:
     $.getJSON(url + apiKey + "/" + latitude + "," + longitude + "?callback=?", function(data) {
-      weather.text("Based on your current location, it is " + data.currently.temperature + "° F right now");
+      weather = "Based on your current location, it is " + data.currently.temperature + "° F right now";
     });
   }
 
-  // This message is displayed if their is a geolocation error:
+  // This message is displayed if there is a geolocation error:
   function error() {
     alert("Unable to retrieve your location for weather");
   }
