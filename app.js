@@ -14,7 +14,7 @@ function getDate()
     .splice(0, 4)
     .join(" ");
     
-    document.getElementById("date").innerHTML = dateAsString;
+    document.getElementById("date").innerText = dateAsString;
 }
 
 //The following function loads the current time to tag "time"
@@ -48,11 +48,11 @@ function getTime()
         timeAsString += " pm"
     }
     
-    document.getElementById("time").innerHTML = timeAsString;
+    document.getElementById("time").innerText = timeAsString;
 }
 
 function loadWeather() {
-  var weather = "weather";
+  var weather = document.getElementById('weather');
   var url = "https://api.forecast.io/forecast/"; // Dark Sky API url
   var apiKey = "f417f17969571f97cf5e00a5ef052376"; // API key from Dark Sky
 
@@ -60,9 +60,10 @@ function loadWeather() {
     var latitude = position.coords.latitude; // latitude using geolocation
     var longitude = position.coords.longitude; // longitude using geolocation
 
+
     // API request:
     $.getJSON(url + apiKey + "/" + latitude + "," + longitude + "?callback=?", function(data) {
-      weather = "Based on your current location, it is " + data.currently.temperature + "° F right now";
+      weather.innerText = "Based on your current location, it is " + data.currently.temperature + " degrees Fahrenheit right now";
     });
   }
 
@@ -75,5 +76,5 @@ function loadWeather() {
   navigator.geolocation.getCurrentPosition(success, error);
 
   // the text that will be displayed while the function is making the request
-  weather = "fetching weather...";
+  weather.innerText = "fetching weather...";
 }
