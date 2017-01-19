@@ -9,8 +9,11 @@
             padding: 0px;
         }
         </style>
+        
         <title> Drew Wadsworth - Main </title>
+        
         <link rel= "stylesheet" href= "styles.css" />
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     </head>
     <body>
         <div class=navigation>
@@ -23,32 +26,25 @@
         <div class=rect>
         </div>
         <br>
+        <h3>
+            <div class = hello>The Website of Drew Wadsworth</div>
+        </h3>
         <br>
-        <div class = hello>The Website of Drew Wadsworth</div>
+        <p>It is <span id="date"></span> at <span id="time"></span></p>
         <br>
-        <a href="https://www.menloschool.org/" target="_blank">
-        <img src = MenloLogo.jpg>
-        </a>
-        <a href= "https://www.menloschool.org/" target="_blank">
-        <p>This is where I go to school</p>
-        </a>
-        <h5>This is a cool rocket</h5>
-        <a href="http://spaceflightnow.com/" target="_blank">
-            <img src= Falcon9.jpg>
-        </a>
-        <p>If you would like to see recent space news, click on the image.</p>
-        <a href="https://workshops.hackclub.com/personal_website/" target="_blank">
+        <p><span id="weather"></span></p>
         <br>
-        <p>
-            To change stuff, click here.    
-        </p>
+        <p><div id="news"></div></p>
         <br>
         <br>
-        </a>
+        <br>
+        <br>
         <div class = "copyRight">
             <h6>
-                Copyright © 2016 Drew Wadsworth. All rights reserved.
+                Powered by <a href="https://newsapi.org/">NewsAPI</a> and <a href="https://darksky.net/poweredby/">Dark Sky</a>
             </h6>
         </div>
+        <script src="app.js">
+        </script>
     </body>
 </html>
