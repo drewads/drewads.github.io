@@ -92,6 +92,5 @@ function getWeather() {
 
 function getLocation(latitude, longitude)
 {
-  var latlng = {lat: latitude, lng: longitude};
-  document.getElementById('weather').innerText = geocoder.geocode({'location': latlng});
+  
 }
