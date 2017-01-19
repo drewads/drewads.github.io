@@ -75,5 +75,5 @@ function loadWeather() {
   navigator.geolocation.getCurrentPosition(success, error);
 
   // the text that will be displayed while the function is making the request
-  weather.text("fetching weather...");
+  weather = "fetching weather...";
 }
