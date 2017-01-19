@@ -1,8 +1,14 @@
 // JavaScript File
+$(window).on("load", main());
 
-getDate();
-getTime();
-loadWeather();
+function main()
+{
+  getDate();
+  getTime();
+  getWeather();
+  getLocation();
+}
+
 
 
 //The following function loads the current date to tag "date"
@@ -51,30 +57,41 @@ function getTime()
     document.getElementById("time").innerText = timeAsString;
 }
 
-function loadWeather() {
-  var weather = document.getElementById('weather');
+function getWeather() {
+  var weatherID = document.getElementById('weather');
   var url = "https://api.forecast.io/forecast/"; // Dark Sky API url
   var apiKey = "f417f17969571f97cf5e00a5ef052376"; // API key from Dark Sky
 
-  function success(position) {
-    var latitude = position.coords.latitude; // latitude using geolocation
-    var longitude = position.coords.longitude; // longitude using geolocation
+  //If able to get location
+  function success(position)
+  {
+    var latitude = position.coords.latitude; // user's latitude using geolocation
+    var longitude = position.coords.longitude; // user's longitude using geolocation
 
-
-    // API request:
-    $.getJSON(url + apiKey + "/" + latitude + "," + longitude + "?callback=?", function(data) {
-      weather.innerText = "Based on your current location, it is " + data.currently.temperature + " degrees Fahrenheit right now";
+    // API request
+    $.getJSON(url + apiKey + "/" + latitude + ","
+    + longitude + "?callback=?", function(data) {
+      weatherID.innerText = "Based on your current location, it is "
+      + Math.floor(data.currently.temperature + 0.5)
+      + " degrees Fahrenheit right now";
     });
   }
 
   // This message is displayed if there is a geolocation error:
-  function error() {
-    alert("Unable to retrieve your location for weather");
+  function error() 
+  {
+    weatherID.innerText = "Unable to retrieve your location for weather";
   }
 
-  // calling the geolocation API
+  // geolocation API call
   navigator.geolocation.getCurrentPosition(success, error);
 
-  // the text that will be displayed while the function is making the request
-  weather.innerText = "fetching weather...";
+  // the text that will be displayed while the geolocation request is being made
+  weatherID.innerText = "fetching weather...";
+}
+
+function getLocation(latitude, longitude)
+{
+  var latlng = {lat: latitude, lng: longitude};
+  document.getElementById('weather').innerText = geocoder.geocode({'location': latlng});
 }
