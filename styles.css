@@ -18,6 +18,11 @@ img
 	text-decoration: none;
 }
 
+.navigation a:hover
+{
+    color: gray;
+}
+
 .rect 
 {
     background-color: gray;
@@ -44,6 +49,16 @@ img
     font-weight: 400;
     font-size: large;
     color: gray;
+    background-color: white;
+}
+
+.weatherApp
+{
+    background-color: #3393FF;
+    color: white;
+    width:20%;
+    margin: auto;
+    font-size: 200%;
 }
 
 .bodya
@@ -53,9 +68,15 @@ img
     font-family: Lato;
     font-variant: small-caps;
     font-size: large;
-    color: white;
-    background-color: gray;
+    color: gray;
+    background-color: white;
     margin: auto;
+}
+
+.bodya:hover
+{
+    background-color:gray;
+    color: white;
 }
 
 body a

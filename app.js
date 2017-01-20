@@ -6,7 +6,10 @@ function main()
 {
   getDate();
   getTime();
-  getWeather();
+  if (getWeather())
+  {
+    document.getElementById("weather").className = "weatherApp";
+  }
   getLocation();
 }
 
@@ -72,34 +75,27 @@ function getWeather() {
     // API request
     $.getJSON(url + apiKey + "/" + latitude + ","
     + longitude + "?callback=?", function(data) {
-      weatherID.innerText = "Based on your current location, it is "
-      + Math.floor(data.currently.temperature + 0.5)
-      + " degrees Fahrenheit right now.";
+      weatherID.innerText = Math.floor(data.currently.temperature + 0.5)
+      + " ºF";
     });
+    return true;
   }
 
   // This message is displayed if there is a geolocation error:
   function error() 
   {
     weatherID.innerText = "Unable to retrieve your location for weather.";
-    
+    return false;
   }
 
   // geolocation API call
   navigator.geolocation.getCurrentPosition(success, error);
 
   // the text that will be displayed while the geolocation request is being made
-  weatherID.innerText = "Acessing weather information...";
+  weatherID.innerText = "Accessing weather information...";
 }
 
 function getLocation(latitude, longitude)
 {
   
-}
-
-function mouseOver()
-{
-  $(".navigation").mouseover(function(){
-      $(".navigation").css("font-color", "gray")
-  })
 }
