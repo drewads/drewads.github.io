@@ -96,3 +96,10 @@ function getLocation(latitude, longitude)
 {
   
 }
+
+function mouseOver()
+{
+  $(".navigation").mouseover(function(){
+      $(".navigation").css("font-color", "gray")
+  })
+}
