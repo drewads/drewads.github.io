@@ -1,4 +1,5 @@
 // JavaScript File
+
 $(window).on("load", main());
 
 function main()
@@ -73,21 +74,22 @@ function getWeather() {
     + longitude + "?callback=?", function(data) {
       weatherID.innerText = "Based on your current location, it is "
       + Math.floor(data.currently.temperature + 0.5)
-      + " degrees Fahrenheit right now";
+      + " degrees Fahrenheit right now.";
     });
   }
 
   // This message is displayed if there is a geolocation error:
   function error() 
   {
-    weatherID.innerText = "Unable to retrieve your location for weather";
+    weatherID.innerText = "Unable to retrieve your location for weather.";
+    
   }
 
   // geolocation API call
   navigator.geolocation.getCurrentPosition(success, error);
 
   // the text that will be displayed while the geolocation request is being made
-  weatherID.innerText = "fetching weather...";
+  weatherID.innerText = "Acessing weather information...";
 }
 
 function getLocation(latitude, longitude)
