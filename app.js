@@ -6,10 +6,7 @@ function main()
 {
   getDate();
   getTime();
-  if (getWeather())
-  {
-    document.getElementById("weather").className = "weatherApp";
-  }
+  getWeather();
   getLocation();
 }
 
@@ -78,14 +75,12 @@ function getWeather() {
       weatherID.innerText = Math.floor(data.currently.temperature + 0.5)
       + " ºF";
     });
-    return true;
   }
 
   // This message is displayed if there is a geolocation error:
   function error() 
   {
     weatherID.innerText = "Unable to retrieve your location for weather.";
-    return false;
   }
 
   // geolocation API call
