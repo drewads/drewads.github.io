@@ -23,7 +23,7 @@ function getDate()
     var dayIDMaxLength = 5;
     var dayID = dateAsString.substring(0,dayIDMaxLength);
     var dayName = correctDayID(dayID, dayIDLength);
-    dateAsString = dayName + dateAsString.substring(dayIDLength(dayID));
+    dateAsString = dayName + ", " + dateAsString.substring(dayIDLength(dayID), dateAsString.length - 5) + ", " + dateAsString.substring(dateAsString.length - 4);
     
     document.getElementById("date").innerText = dateAsString;
 }
