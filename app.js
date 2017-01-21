@@ -22,14 +22,14 @@ function getDate()
     //Adds "day" to the end of the first part of the day name
     var dayIDMaxLength = 5;
     var dayID = dateAsString.substring(0,dayIDMaxLength);
-    var dayIDLength = correctDay(dayID);
-    dateAsString = dateAsString.substring(0, dayIDLength) + "day" + dateAsString.substring(dayIDLength);
+    var dayName = correctDayID(dayID, dayIDLength);
+    dateAsString = dayName + dateAsString.substring(dayIDLength(dayID));
     
     document.getElementById("date").innerText = dateAsString;
 }
 
 //Finds the length of the day abbreviation
-function correctDay(dayID)
+function dayIDLength(dayID)
 {
   if (dayID.substring(0, 3) == "Sun"
   || dayID.substring(0, 3) == "Mon"
@@ -46,6 +46,43 @@ function correctDay(dayID)
   else if (dayID.substring(0, 5) == "Thurs")
   {
     return 5;
+  }
+}
+
+//Returns correct day name
+function correctDayID(dayID, dayIDLength)
+{
+  if (dayID.substring(0, dayIDLength(dayID)) == "Mon")
+  {
+    return "Monday";  
+  }
+  else if (dayID.substring(0, dayIDLength(dayID)) == "Tues")
+  {
+    return "Tuesday";
+  }
+  else if (dayID.substring(0, dayIDLength(dayID)) == "Wed")
+  {
+    return "Wednesday";
+  }
+  else if (dayID.substring(0, dayIDLength(dayID)) == "Thurs")
+  {
+    return "Thursday";
+  }
+  else if (dayID.substring(0, dayIDLength(dayID)) == "Fri")
+  {
+    return "Friday";
+  }
+  else if (dayID.substring(0, dayIDLength(dayID)) == "Sat")
+  {
+    return "Saturday";
+  }
+  else if (dayID.substring(0, dayIDLength(dayID)) == "Sun")
+  {
+    return "Sunday";
+  }
+  else
+  {
+    return "";
   }
 }
 

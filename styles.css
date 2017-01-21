@@ -73,6 +73,7 @@ li a:hover
     font-size: xx-large;
     letter-spacing: 4px;
     color: white;
+    padding-top: 20px;
 }
 
 .body
@@ -93,19 +94,47 @@ span
 .bodya
 {
     width: 15%;
+    height: 45px;
     text-align: center;
     font-family: Lato;
     font-variant: small-caps;
     font-size: large;
     color: white;
-    background-color: #3393FF;
+    background-color: RGBa(77, 77, 77, .70);
     margin: auto;
+    line-height: 45px;
 }
 
 .bodya:hover
 {
-    background-color: yellow;
-    color: gray;
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+    height: 43px;
+    line-height: 43px;
+}
+
+.bodya2
+{
+    width: 20%;
+    height: 45px;
+    text-align: center;
+    font-family: Lato;
+    font-variant: small-caps;
+    font-size: large;
+    color: white;
+    background-color: RGBa(77, 77, 77, .70);
+    margin: auto;
+    line-height: 45px;
+}
+
+.bodya2:hover
+{
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+    height: 43px;
+    line-height: 43px;
 }
 
 body a
