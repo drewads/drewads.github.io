@@ -10,8 +10,6 @@ function main()
   getLocation();
 }
 
-
-
 //The following function loads the current date to tag "date"
 function getDate()
 {
@@ -21,7 +19,34 @@ function getDate()
     .splice(0, 4)
     .join(" ");
     
+    //Adds "day" to the end of the first part of the day name
+    var dayIDMaxLength = 5;
+    var dayID = dateAsString.substring(0,dayIDMaxLength);
+    var dayIDLength = correctDay(dayID);
+    dateAsString = dateAsString.substring(0, dayIDLength) + "day" + dateAsString.substring(dayIDLength);
+    
     document.getElementById("date").innerText = dateAsString;
+}
+
+//Finds the length of the day abbreviation
+function correctDay(dayID)
+{
+  if (dayID.substring(0, 3) == "Sun"
+  || dayID.substring(0, 3) == "Mon"
+  || dayID.substring(0, 3) == "Wed"
+  || dayID.substring(0, 3) == "Fri"
+  || dayID.substring(0,3) == "Sat")
+  {
+    return 3;
+  }
+  else if (dayID.substring(0, 4) == "Tues")
+  {
+    return 4;
+  }
+  else if (dayID.substring(0, 5) == "Thurs")
+  {
+    return 5;
+  }
 }
 
 //The following function loads the current time to tag "time"
@@ -35,6 +60,10 @@ function getTime()
     {
         timeAsString -= 12;
         isAfterNoon = true;
+    }
+    else if (timeAsString == 0)
+    {
+      timeAsString = 12;
     }
     
     if (currentTime.getMinutes() < 10)

@@ -3,6 +3,7 @@ body
     background-image: url(IMG_4784.JPG);
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 li
@@ -15,13 +16,19 @@ li
     color: #3393FF;
 }
 
-li a{
+li a
+{
     color: white;
     text-decoration: none;
     font-family: 'Lato', sans-serif;
     font-variant: small-caps;
     font-weight: 400;
     font-size: x-large;
+}
+
+li a:hover
+{
+    color: black;    
 }
 
 
@@ -78,13 +85,9 @@ li a{
     color: white;
 }
 
-.weatherApp
+span
 {
-    background-color: #3393FF;
-    color: white;
-    width:20%;
-    margin: auto;
-    font-size: 200%;
+    font-size: x-large;
 }
 
 .bodya
