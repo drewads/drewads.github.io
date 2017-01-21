@@ -144,11 +144,11 @@ body a
 
 .attribution
 {
+    text-align: center;
     font-family: Times;
     color: black;
     font-size: small;
     bottom: 0;
-    text-align: center;
     position: fixed;
     width: 100%;
 }
