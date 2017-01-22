@@ -154,5 +154,3 @@ function getWeather() {
   // the text that will be displayed while the geolocation request is being made
   weatherID.innerText = "Accessing weather information...";
 }
-
-
