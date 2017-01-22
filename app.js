@@ -7,7 +7,6 @@ function main()
   getDate();
   getTime();
   getWeather();
-  getLocation();
 }
 
 //The following function loads the current date to tag "date"
@@ -156,7 +155,4 @@ function getWeather() {
   weatherID.innerText = "Accessing weather information...";
 }
 
-function getLocation(latitude, longitude)
-{
-  
-}
+
