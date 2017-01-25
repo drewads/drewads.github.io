@@ -34,13 +34,10 @@ function dayIDLength(dayID)
   || dayID.substring(0, 3) == "Mon"
   || dayID.substring(0, 3) == "Wed"
   || dayID.substring(0, 3) == "Fri"
-  || dayID.substring(0,3) == "Sat")
+  || dayID.substring(0,3) == "Sat"
+  || dayID.substring(0, 3) == "Tue")
   {
     return 3;
-  }
-  else if (dayID.substring(0, 4) == "Tues")
-  {
-    return 4;
   }
   else if (dayID.substring(0, 5) == "Thurs")
   {
@@ -55,7 +52,7 @@ function correctDayID(dayID, dayIDLength)
   {
     return "Monday";  
   }
-  else if (dayID.substring(0, dayIDLength(dayID)) == "Tues")
+  else if (dayID.substring(0, dayIDLength(dayID)) == "Tue")
   {
     return "Tuesday";
   }
