@@ -19,16 +19,19 @@ function getDate()
     .join(" ");
     
     //Adds "day" to the end of the first part of the day name
-    var dayIDLength = 3;
-    var dayID = dateAsString.substring(0, dayIDLength);
-    var dayName = correctDayID(dayID, dayIDLength);
-    dateAsString = dayName + ", " + dateAsString.substring(dayIDLength, dateAsString.length - 5) + ", " + dateAsString.substring(dateAsString.length - 4);
+    var IDLength = 3;
+    var dayID = dateAsString.substring(0, IDLength);
+    var monthID = dateAsString.substring(IDLength + 1, 2 * IDLength + 1);
+    dateAsString = getDayName(dayID) + ", "
+    + getMonthName(monthID)
+    + dateAsString.substring(2 * IDLength + 1, dateAsString.length - 5)
+    + ", " + dateAsString.substring(dateAsString.length - 4);
     
     document.getElementById("date").innerText = dateAsString;
 }
 
 //Returns correct day name
-function correctDayID(dayID)
+function getDayName(dayID)
 {
   if (dayID == "Mon")
   {
@@ -57,6 +60,63 @@ function correctDayID(dayID)
   else if (dayID == "Sun")
   {
     return "Sunday";
+  }
+  else
+  {
+    return "";
+  }
+}
+
+//Returns correct month name
+function getMonthName(monthID)
+{
+  if (monthID == "Jan")
+  {
+    return "January";
+  }
+  else if (monthID == "Feb")
+  {
+    return "February";
+  }
+  else if (monthID == "Mar")
+  {
+    return "March";
+  }
+  else if (monthID == "Apr")
+  {
+    return "April";
+  }
+  else if (monthID == "May")
+  {
+    return "May";
+  }
+  else if (monthID == "Jun")
+  {
+    return "June";
+  }
+  else if (monthID == "Jul")
+  {
+    return "July";
+  }
+  else if (monthID == "Aug")
+  {
+    return "August";
+  }
+  else if (monthID == "Sep")
+  {
+    return "September";
+  }
+  else if (monthID == "Oct")
+  {
+    return "October";
+  }
+  else if (monthID == "Nov")
+  {
+    return "November";
+  }
+  else if (monthID == "Dec")
+  {
+    return "December";
   }
   else
   {
