@@ -19,60 +19,42 @@ function getDate()
     .join(" ");
     
     //Adds "day" to the end of the first part of the day name
-    var dayIDMaxLength = 5;
-    var dayID = dateAsString.substring(0,dayIDMaxLength);
+    var dayIDLength = 3;
+    var dayID = dateAsString.substring(0, dayIDLength);
     var dayName = correctDayID(dayID, dayIDLength);
-    dateAsString = dayName + ", " + dateAsString.substring(dayIDLength(dayID), dateAsString.length - 5) + ", " + dateAsString.substring(dateAsString.length - 4);
+    dateAsString = dayName + ", " + dateAsString.substring(dayIDLength, dateAsString.length - 5) + ", " + dateAsString.substring(dateAsString.length - 4);
     
     document.getElementById("date").innerText = dateAsString;
 }
 
-//Finds the length of the day abbreviation
-function dayIDLength(dayID)
-{
-  if (dayID.substring(0, 3) == "Sun"
-  || dayID.substring(0, 3) == "Mon"
-  || dayID.substring(0, 3) == "Wed"
-  || dayID.substring(0, 3) == "Fri"
-  || dayID.substring(0,3) == "Sat"
-  || dayID.substring(0, 3) == "Tue")
-  {
-    return 3;
-  }
-  else if (dayID.substring(0, 5) == "Thurs")
-  {
-    return 5;
-  }
-}
-
 //Returns correct day name
-function correctDayID(dayID, dayIDLength)
+function correctDayID(dayID)
 {
-  if (dayID.substring(0, dayIDLength(dayID)) == "Mon")
+  if (dayID == "Mon")
   {
     return "Monday";  
   }
-  else if (dayID.substring(0, dayIDLength(dayID)) == "Tue")
+  else if (dayID == "Tue")
   {
     return "Tuesday";
   }
-  else if (dayID.substring(0, dayIDLength(dayID)) == "Wed")
+  else if (dayID == "Wed")
   {
     return "Wednesday";
   }
-  else if (dayID.substring(0, dayIDLength(dayID)) == "Thurs")
+  else if (dayID == "Thu")
   {
     return "Thursday";
   }
-  else if (dayID.substring(0, dayIDLength(dayID)) == "Fri")
+  else if (dayID == "Fri")
   {
     return "Friday";
   }
-  else if (dayID.substring(0, dayIDLength(dayID)) == "Sat")
+  else if (dayID == "Sat")
   {
     return "Saturday";
   }
-  else if (dayID.substring(0, dayIDLength(dayID)) == "Sun")
+  else if (dayID == "Sun")
   {
     return "Sunday";
   }
