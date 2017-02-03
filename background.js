@@ -24,7 +24,7 @@ function setBackground()
   }
   else if (dateAsString.substring(0, 1) == "F")
   {
-     $('body').css('background-image', 'url(img_sunriseLakes.jpg)');
+     $('body').css('background-color', "gray");
   }
   else if (dateAsString.substring(0, 2) == "Sa")
   {
