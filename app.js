@@ -23,8 +23,8 @@ function getDate()
     var dayID = dateAsString.substring(0, IDLength);
     var monthID = dateAsString.substring(IDLength + 1, 2 * IDLength + 1);
     dateAsString = getDayName(dayID) + ", "
-    + getMonthName(monthID)
-    + dateAsString.substring(2 * IDLength + 1, dateAsString.length - 5)
+    + getMonthName(monthID) + " "
+    + getDayOfMonth(dateAsString)
     + ", " + dateAsString.substring(dateAsString.length - 4);
     
     document.getElementById("date").innerText = dateAsString;
@@ -136,6 +136,10 @@ function getTime()
         timeAsString -= 12;
         isAfterNoon = true;
     }
+    else if (timeAsString == 12)
+    {
+        isAfterNoon = true;
+    }
     else if (timeAsString == 0)
     {
       timeAsString = 12;
@@ -156,10 +160,23 @@ function getTime()
     }
     else
     {
-        timeAsString += " pm"
+        timeAsString += " pm";
     }
     
     document.getElementById("time").innerText = timeAsString;
+}
+
+function getDayOfMonth(dateAsString)
+{
+    var startOfDayNum = 8;  //Distance from beginning of String where the day number starts
+    var endOfDayNum = 10;    //Distance from beginning of String where the day number ends
+    
+    if (dateAsString.substring(startOfDayNum, startOfDayNum + 1) == "0")
+    {
+      startOfDayNum++;
+    }
+    
+    return dateAsString.substring(startOfDayNum, endOfDayNum);
 }
 
 function getWeather() {
