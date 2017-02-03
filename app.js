@@ -5,7 +5,7 @@ $(window).on("load", main());
 function main()
 {
   getDate();
-  getTime();
+  updateTime();
   getWeather();
 }
 
@@ -124,12 +124,26 @@ function getMonthName(monthID)
   }
 }
 
+function updateTime()
+{
+  setInterval(function(){
+    getTime();
+  },1000);
+}
+
 //The following function loads the current time to tag "time"
 function getTime()
 {
     var currentTime = new Date();
     var timeAsString = currentTime.getHours().toString();
     var isAfterNoon = false;
+    
+    //The following updates the date when the day changes
+    if (timeAsString == 0 && currentTime.getSeconds() <= 2)
+    {
+      getDate();
+      setBackground();
+    }
     
     if (timeAsString > 12)
     {
@@ -147,11 +161,21 @@ function getTime()
     
     if (currentTime.getMinutes() < 10)
     {
-      timeAsString = timeAsString + ":0" + currentTime.getMinutes();
+      timeAsString += ":0" + currentTime.getMinutes();
     }
     else
     {
-      timeAsString = timeAsString + ":" + currentTime.getMinutes();
+      timeAsString += ":" + currentTime.getMinutes();
+    }
+    
+    var seconds = currentTime.getSeconds();
+    if (seconds < 10)
+    {
+      timeAsString += ":0" + seconds;
+    }
+    else
+    {
+      timeAsString += ":" + seconds;
     }
     
     if (!isAfterNoon)
