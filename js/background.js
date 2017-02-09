@@ -14,6 +14,12 @@ function setBackground()
     changeFavicon("/favicons/faviconValentine-32x32.png");
     document.getElementById("holiday").innerText = "Happy Valentine's Day!";
   }
+  else if (dateAsString.substring(0,15) == "Fri Feb 10 2017") //Dani's birthday!
+  {
+    document.body.style.backgroundImage = "url('/backgrounds/img_birthday.png')";
+    changeFavicon("/favicons/faviconGreen-32x32.png");
+    document.getElementById("holiday").innerText = "Happy Birthday, Dani!";
+  }
   else if (dateAsString.substring(0, 1) == "M")
   {
     document.body.style.backgroundImage = "url('/backgrounds/img_hull.jpg')";
