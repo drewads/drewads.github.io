@@ -16,7 +16,7 @@ function setBackground()
   }
   else if (dateAsString.substring(0,15) == "Fri Feb 10 2017") //Dani's birthday!
   {
-    document.body.style.backgroundImage = "url('/backgrounds/img_birthday.png')";
+    document.body.style.backgroundImage = "url('/backgrounds/img_birthday.jpg')";
     changeFavicon("/favicons/faviconGreen-32x32.png");
     document.getElementById("holiday").innerText = "Happy Birthday, Dani!";
   }
