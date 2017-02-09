@@ -8,26 +8,27 @@ function setBackground()
   var currentDate = new Date();
   var dateAsString = currentDate.toString();
   
-  if (dateAsString.substring(0,15) == "Wed Feb 08 2017")
+  if (dateAsString.substring(0,15) == "Wed Feb 08 2017") //Valentine's Day!
   {
-    document.body.style.backgroundImage = "url('/img_valentine.png')";
+    document.body.style.backgroundImage = "url('/backgrounds/img_valentine.png')";
     changeFavicon("/favicons/faviconValentine-32x32.png");
+    document.getElementsByClassName("hello").innerText = "Happy Valentine's Day!";
   }
   else if (dateAsString.substring(0, 1) == "M")
   {
-    document.body.style.backgroundImage = "url('img_hull.jpg')";
+    document.body.style.backgroundImage = "url('/backgrounds/img_hull.jpg')";
   }
   else if (dateAsString.substring(0, 2) == "Tu")
   {
-     $('body').css('background-image', 'url(img_crs3.jpg)');
+     $('body').css('background-image', 'url(/backgrounds/img_crs3.jpg)');
   }
   else if (dateAsString.substring(0, 1) == "W")
   {
-    $('body').css('background-image', 'url(img_blockIsland.jpg)');
+    $('body').css('background-image', 'url(/backgrounds/img_blockIsland.jpg)');
   }
   else if (dateAsString.substring(0, 2) == "Th")
   {
-    $('body').css('background-image', 'url(img_exposureLeft.jpg)');
+    $('body').css('background-image', 'url(/backgrounds/img_exposureLeft.jpg)');
   }
   else if (dateAsString.substring(0, 1) == "F")
   {
@@ -35,11 +36,11 @@ function setBackground()
   }
   else if (dateAsString.substring(0, 2) == "Sa")
   {
-     $('body').css('background-image', 'url(img_lakeChutes.jpg)');
+     $('body').css('background-image', 'url(/backgrounds/img_lakeChutes.jpg)');
   }
   else if (dateAsString.substring(0, 2) == "Su")
   {
-     $('body').css('background-image', 'url(img_exposureRight.jpg)');
+     $('body').css('background-image', 'url(/backgrounds/img_exposureRight.jpg)');
   }
 }
 
