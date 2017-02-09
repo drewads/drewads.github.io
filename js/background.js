@@ -8,7 +8,7 @@ function setBackground()
   var currentDate = new Date();
   var dateAsString = currentDate.toString();
   
-  if (dateAsString.substring(0,15) == "Wed Feb 08 2017") //Valentine's Day!
+  if (dateAsString.substring(0,15) == "Tue Feb 14 2017") //Valentine's Day!
   {
     document.body.style.backgroundImage = "url('/backgrounds/img_valentine.png')";
     changeFavicon("/favicons/faviconValentine-32x32.png");
