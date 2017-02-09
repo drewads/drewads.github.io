@@ -12,7 +12,7 @@ function setBackground()
   {
     document.body.style.backgroundImage = "url('/backgrounds/img_valentine.png')";
     changeFavicon("/favicons/faviconValentine-32x32.png");
-    document.getElementsByClassName("hello").innerText = "Happy Valentine's Day!";
+    document.getElementById("holiday").innerText = "Happy Valentine's Day!";
   }
   else if (dateAsString.substring(0, 1) == "M")
   {
