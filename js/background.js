@@ -1,7 +1,5 @@
 // JavaScript File
 
-document.head = document.head || document.getElementsByTagName('head')[0];
-
 setBackground();
 
 function setBackground()
@@ -9,11 +7,9 @@ function setBackground()
   var currentDate = new Date();
   var dateAsString = currentDate.toString();
   
-  if (dateAsString.substring(0,15) == "Wed Feb 08 2017")
+  if (dateAsString.substring(0,15) == "Tue Feb 14 2017")
   {
     document.body.style.backgroundImage = "url('img_valentine.png')";
-    
-    changeFavicon("url('/favicons/faviconValentine-32x32.png')");
   }
   else if (dateAsString.substring(0, 1) == "M")
   {
@@ -43,16 +39,4 @@ function setBackground()
   {
      $('body').css('background-image', 'url(img_exposureRight.jpg)');
   }
-}  
-
-function changeFavicon(src) {
- var link = document.createElement('link'),
-     oldLink = document.getElementById('favicon');
- link.id = 'favicon';
- link.rel = 'shortcut icon';
- link.href = src;
- if (oldLink) {
-  document.head.removeChild(oldLink);
- }
- document.head.appendChild(link);
 }
