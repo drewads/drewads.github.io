@@ -10,7 +10,7 @@ function setBackground()
   
   if (dateAsString.substring(0,15) == "Wed Feb 08 2017")
   {
-    document.body.style.backgroundImage = "url('img_valentine.png')";
+    document.body.style.backgroundImage = "url('/img_valentine.png')";
     changeFavicon("/favicons/faviconValentine-32x32.png");
   }
   else if (dateAsString.substring(0, 1) == "M")
