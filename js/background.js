@@ -18,8 +18,8 @@ function setBackground()
   {
     document.body.style.backgroundImage = "url('/backgrounds/img_birthday.jpg')";
     changeFavicon("/favicons/faviconGreen-32x32.png");
-    document.getElementById("holiday").innerText = "Happy Birthday, Dani!";
-    document.getElementById("holiday").style.color = "black";
+    document.getElementById("hello").innerText = "Happy Birthday, Dani!";
+    document.getElementById("hello").style.color = "#003090";
   }
   else if (dateAsString.substring(0, 1) == "M")
   {
