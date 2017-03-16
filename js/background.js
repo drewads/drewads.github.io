@@ -1,13 +1,53 @@
 // JavaScript File
 document.head || (document.head = document.getElementsByTagName('head')[0]);
 
+var currentBackground = Math.floor(Math.random() * 7);
+
 updateBackground();
 
 function updateBackground()
 {
   setInterval(function(){
-    setBackground();
+    changeBackground(currentBackground);
+    var newBackground = Math.floor(Math.random() * 7);
+    while (newBackground == currentBackground)
+    {
+      newBackground = Math.floor(Math.random() * 7);
+    }
+    currentBackground = newBackground;
   },10000);
+}
+
+function changeBackground(imgNum)
+{
+  if (imgNum == 1)
+  {
+    document.body.style.backgroundImage = "url('/backgrounds/img_hull.jpg')";
+  }
+  else if (imgNum == 2)
+  {
+     $('body').css('background-image', 'url(/backgrounds/img_crs3.jpg)');
+  }
+  else if (imgNum == 3)
+  {
+    $('body').css('background-image', 'url(/backgrounds/img_blockIsland.jpg)');
+  }
+  else if (imgNum == 4)
+  {
+    $('body').css('background-image', 'url(/backgrounds/img_exposureLeft.jpg)');
+  }
+  else if (imgNum == 5)
+  {
+     $('body').css('background-color', "gray");
+  }
+  else if (imgNum == 6)
+  {
+     $('body').css('background-image', 'url(/backgrounds/img_lakeChutes.jpg)');
+  }
+  else if (imgNum == 0)
+  {
+     $('body').css('background-image', 'url(/backgrounds/img_exposureRight.jpg)');
+  }
 }
 
 function setBackground()
