@@ -1,0 +1,143 @@
+body
+{
+    background-color: black;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+}
+
+.nav li
+{
+    float: left;
+    padding-left: 20px;
+    padding-right: 50px;
+    padding-top: 0;
+    list-style-type: none;
+    color: #3393FF;
+}
+
+.nav li a
+{
+    color: white;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    font-variant: small-caps;
+    font-weight: 400;
+    font-size: x-large;
+}
+
+.nav li a:hover, a:active
+{
+    color: black;    
+}
+
+.hello
+{
+    text-align: center;
+    font-family: Lato;
+    font-style: normal;
+    font-variant: small-caps;
+    font-size: xx-large;
+    letter-spacing: 4px;
+    color: white;
+    padding-top: 20px;
+}
+
+.body
+{
+    text-align: center;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 400;
+    font-size: large;
+    color: white;
+}
+
+.body a
+{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 400;
+    font-size: large;
+    color: white;
+}
+
+span
+{
+    font-size: x-large;
+}
+
+.bodya
+{
+    width: 190px;
+    height: 45px;
+    text-align: center;
+    font-family: Lato;
+    font-variant: small-caps;
+    font-size: large;
+    color: white;
+    background-color: RGBa(77, 77, 77, .70);
+    margin: auto;
+    line-height: 45px;
+    display: inline-block;
+    border: 1px gray;
+    -webkit-transition: border-color .2s linear; 
+    -moz-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.bodya:hover, .bodya:active
+{
+    border: 1px solid white;
+    height: 43px;
+    line-height: 43px;
+}
+
+.bodya2
+{
+    width: 240px;
+    height: 45px;
+    font-family: Lato;
+    font-variant: small-caps;
+    font-size: large;
+    color: white;
+    background-color: RGBa(77, 77, 77, .70);
+    line-height: 45px;
+    margin: auto;
+    text-align: center;
+    display: inline-block;
+    border: 1px gray;
+    -webkit-transition: border-color .2s linear; 
+    -moz-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    -ms-transition: border-color .2s linear;
+    transition: border-color .2s linear;
+}
+
+.bodya2:hover, .bodya2:active
+{
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+    height: 43px;
+    line-height: 43px;
+}
+
+body a
+{
+    text-decoration: none;
+}
+
+.attribution
+{
+    text-align: center;
+    font-family: Times;
+    color: black;
+    font-size: small;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+}

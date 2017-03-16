@@ -1,7 +1,14 @@
 // JavaScript File
 document.head || (document.head = document.getElementsByTagName('head')[0]);
 
-setBackground();
+updateBackground();
+
+function updateBackground()
+{
+  setInterval(function(){
+    setBackground();
+  },10000);
+}
 
 function setBackground()
 {

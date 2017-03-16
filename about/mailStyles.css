@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.mail{
+    float: right;
+    padding-top: 4px;
+}
