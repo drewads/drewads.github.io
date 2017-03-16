@@ -2,19 +2,20 @@
 document.head || (document.head = document.getElementsByTagName('head')[0]);
 
 var currentBackground = Math.floor(Math.random() * 7);
+changeBackground(currentBackground);
 
 updateBackground();
 
 function updateBackground()
 {
   setInterval(function(){
-    changeBackground(currentBackground);
     var newBackground = Math.floor(Math.random() * 7);
     while (newBackground == currentBackground)
     {
       newBackground = Math.floor(Math.random() * 7);
     }
     currentBackground = newBackground;
+    changeBackground(currentBackground);
   },10000);
 }
 
