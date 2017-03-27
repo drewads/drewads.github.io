@@ -1,0 +1,28 @@
+.top
+{
+    text-align: center;
+}
+
+.inputBox
+{
+    margin: 16px 0;
+}
+
+input[type="text"]
+{
+    width: 400px;
+    padding: 12px 20px;
+    margin: 0px 0;
+    margin-bottom: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+input[type=text]:focus
+{
+    border: 3px solid #555;
+    outline: 0;
+    margin-bottom: 0px;
+}

@@ -1,7 +1,7 @@
 <!Doctype html>
 <html lang="en-us">
     <head>
-        <title> Drew Wadsworth - Projects </title>
+        <title> Drew Wadsworth - Home </title>
         
         <link id="favicon" rel="icon" type="image/png" href="/favicons/faviconBlue-32x32.png" sizes="32x32"/>
         
@@ -17,29 +17,33 @@
     </head>
     <body>
         <ul>
-            <li><a href = "/main/">home</a></li>
-            <li><a href = "./">projects</a></li>
+            <li><a href = "./">home</a></li>
+            <li><a href = "/projects/">projects</a></li>
             <li><a href = "/about/">about</a></li>
         </ul>
         <br>
-        <br>
-        <div class = "hello">Projects</div>
-        <br>
-        <br>
-        <br>
-        <a href = https://github.com/drewads target="_blank">
-            <div class = "bodya">
-                click for my github
-            </div>
-        </a>
-        <br>
+        <h3>
+            <div id = "hello" class = "hello">Welcome to wadsworth.tech</div>
+        </h3>
         <br>
         <div class = "body">
-            <p>
-                This page will be updated with projects I have worked on and am currently working on<a href=https://soundcloud.com/kylxme/sets/k16/s-ZJWG5>.</a>
-                <br>
-                For now, check out my github for code I've written.
-            </p>
+            <p><span id="date"></span>
+            <br>
+            <span id="time"></span></p>
+            <br>
+            <br>
+            <p><span id="weather"></span></p>
+            <br>
+            <br>
+            <p><span id="holiday"></span></p>
+        </div>
+        <br>
+        <div class = "attribution">
+            <h6>
+                Temperature powered by <a href="https://darksky.net/poweredby/">Dark Sky</a>
+            </h6>
         </div>
         <script src="/js/background.js"></script>
-    </body>    
+        <script src="/js/app.js"></script>
+    </body>
+</html>
