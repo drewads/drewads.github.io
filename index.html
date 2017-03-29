@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="LatinVocabStyles.css">
+    <script>
+        if (location.protocol != 'https:')
+        {
+            location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+        }
+    </script>
 	<title>Nosce Lingua Latina ē wadsworth.tech</title>
+    <link rel="stylesheet" href="LatinVocabStyles.css">
     <link id="favicon" rel="icon" type="image/png" href="/favicons/faviconBlue-32x32.png" sizes="32x32"/>
 </head>
 <body>
+<!-- Version 0.5.2 -->
+<!-- Add: How many you got right/which ones to study, the study tool, submit button?, tool to study only the incorrect terms, more information/colors in the "correct" or "incorrect" display, "I was actually right" button-->
 <div class="top">
     <h1>Nosce Verba Latina!</h1>
 
@@ -37,7 +45,8 @@ var ch29 = [
   ["aestus","aestūs, m: heat, boiling, surging, tide"],
   ["armāmenta","armāmentōrum, n pl: implements, gear, tackle, rigging"],
   ["dēligō","1: to bind, tie down, fasten, moor"],
-  ["fūnis","fūnis, m: rope, cable"]
+  ["fūnis","fūnis, m: rope, cable"],
+  ["hiems","hiemis, f: wintertime, winter"]
 ];
 
 var ch30 = [
@@ -71,12 +80,14 @@ var chapterWords = ch30;
 
 <a href="http://www.cs.waikato.ac.nz/~tetaka/PDF/Macron%20Vowels%20on%20a%20Mac%2010.6-7.pdf"><p> To use macrons in this app, you will need to download the Māori keyboard. </p></a>
 
-<p style="margin: 0px; margin-top: 16px;">For example:</p>
+<p style="margin: 8px margin-left: 0px;">To get the answer correct, you must input at least one correct English meaning.</p>
+
+<p style="margin: 0px; margin-top: 16px;">How to use/examples:</p>
 <p style="margin: 0px;">Prompt: "emō" Enter: "emere, ēmī, emptum: to buy"</p>
 <p style="margin: 0px; margin-bottom: 16px;">Prompt: "finēs" Enter: "finium, n pl: territory"</p>
 
 <script type="text/javascript">
-for (var chaptersIndex = 0; chaptersIndex < chapters.length; chaptersIndex++)
+    for (var chaptersIndex = 0; chaptersIndex < chapters.length; chaptersIndex++)
 {
     createButton(chapters[chaptersIndex][1]);
 }
@@ -97,12 +108,14 @@ function createButton(value)
                 document.getElementById("currentChapter").innerText = chapters[i][1];
             }
         }
-        runProgram(chapterWords);
+        runProgram(shuffle(chapterWords));
     };
 }
 </script>
 
-<p id="currentChapter" style="margin-top: 32px;">De Bello Gallico Chapter 30</p>
+<p id="currentChapter" style="margin-top: 32px; color: blue;">De Bello Gallico Chapter 30</p>
+
+<button onclick="printStudy()">Study This Chapter</button>
 
 <p id= "term" style= "margin-bottom: 0px;"> Term: </p>
 <p id="prompt" style= "margin-top: 0px;"></p>
@@ -114,15 +127,25 @@ function createButton(value)
 
 <p id="reaction" style="margin-top: 32px;"></p>
 
+<p id="shouldStudy" style="margin-top: 32px;"></p>
+
+<p id="study"></p>
+
 <script type="text/javascript">
 
-runProgram(chapterWords);
+runProgram(shuffle(chapterWords));
 
 function runProgram(words)
 {
     var i = 0;
 
+    var termsWrong = new Array();
+
     document.getElementById("prompt").innerText = words[i][0];
+
+    document.getElementById("reaction").innerText = "";
+    document.getElementById("shouldStudy").innerText = "";
+    document.getElementById("study").innerText = "";
 
     var entered = false;
 
@@ -130,67 +153,83 @@ function runProgram(words)
 
     function getInput(i)
     {
-    	document.getElementById("prompt").innerText = words[i][0];
-    	document.getElementById("textInput").value = "";
-    	document.getElementById("textInput").onchange = function(e)
-    	{
-    		if (!entered)
-    		{
-    			var response = document.getElementById("textInput").value;
-    	        
-    	        entered = true;
+        document.getElementById("prompt").innerText = words[i][0];
+        document.getElementById("textInput").value = "";
+        document.getElementById("textInput").onchange = function(e)
+        {
+            if (!entered)
+            {
+                var response = document.getElementById("textInput").value;
+                
+                entered = true;
 
-    	        var definitionWords = getDefinitionWords(i);
+                var definitionWords = getDefinitionWords(i);
 
-    	        var correctDefinition = false;
+                var correctDefinition = false;
 
-    	        for (var ind = 0; ind < definitionWords.length; ind++)
-    	        {
-    	        	if ((response.substring(response.indexOf(":") + 1)).indexOf(definitionWords[ind]) != -1)
-    	        	{
-    	        		correctDefinition = true;
-    	        	}
-    	        }
-    	        
-    	        if (response.substring(0, response.indexOf(":")) == words[i][1].substring(0, words[i][1].indexOf(":")) && correctDefinition)
-    			{
-    				document.getElementById("reaction").innerText = "Good job! \n You said: " + response;
-    				document.getElementById("reaction").style.color = "green";
-    			}
-    			else
-    			{
-    				document.getElementById("reaction").innerText = "Incorrect. \n You said: " + words[i][0] + ": " + response + "\nCorrect: " + words[i][0] + ": " + words[i][1];
-    				document.getElementById("reaction").style.color = "red";
-    			}
-    			
-    			entered = false;
-    			
-    			if (i < words.length - 1)
-    			{
-    				getInput(i + 1);
-    			}
-    			else
-    			{
-    				document.getElementById("term").innerText = "";
+                for (var ind = 0; ind < definitionWords.length; ind++)
+                {
+                    if ((response.substring(response.indexOf(":") + 1)).indexOf(definitionWords[ind]) != -1)
+                    {
+                        correctDefinition = true;
+                    }
+                }
+                
+                if (response.substring(0, response.indexOf(":")) == words[i][1].substring(0, words[i][1].indexOf(":")) && correctDefinition)
+                {
+                    document.getElementById("reaction").innerText = "Good job! \n You said: " + words[i][0] + ": " + response;
+                    document.getElementById("reaction").style.color = "green";
+                }
+                else
+                {
+                    document.getElementById("reaction").innerText = "Incorrect. \n You said: " + words[i][0] + ": " + response + "\nCorrect: " + words[i][0] + ": " + words[i][1];
+                    document.getElementById("reaction").style.color = "red";
+                    termsWrong.push(words[i][0] + ": " + words[i][1]);
+                }
+                
+                entered = false;
+                
+                if (i < words.length - 1)
+                {
+                    getInput(i + 1);
+                }
+                else
+                {
+                    document.getElementById("term").innerText = "";
                     document.getElementById("prompt").innerText = "You are done.";
-    				document.getElementById("textInput").value = "";
-    				entered = true;
-    			}
-    		}
-    	};
+                    document.getElementById("textInput").value = "";
+                    entered = true;
+
+                    var termsWrongString = "";
+                    for (var wrongI = 0; wrongI < termsWrong.length; wrongI++)
+                    {
+                        termsWrongString += termsWrong[wrongI] + "\n";
+                    }
+                    if (termsWrongString.length > 0)
+                    {
+                        document.getElementById("shouldStudy").innerText = "You got the following words wrong: \n \n" + termsWrongString;
+                    }
+                    else
+                    {
+                        document.getElementById("shouldStudy").innerText = "Well done. You got no words wrong!"
+                    }
+                    
+                }
+            }
+        };
     }
 
     /**
-    *	Parses the English definition of the Latin and inserts each parsed word
-    *	of the English into an array.  Returns the array.
+    *   Parses the English definition of the Latin and inserts each parsed word
+    *   of the English into an array.  Returns the array.
     *
-    *	parameter i: the index of the current vocab in the 2D array called words
+    *   parameter i: the index of the current vocab in the 2D array called words
     **/
     function getDefinitionWords(i)
     {
-        var correctWords = new Array();	//The array to contain the English words
+        var correctWords = new Array(); //The array to contain the English words
         
-        var correctDef = words[i][1].substring((words[i][1].indexOf(":") + 1));	//The full correct English definition
+        var correctDef = words[i][1].substring((words[i][1].indexOf(":") + 1)); //The full correct English definition
 
         //Cuts out words from right to left until the definition has length 0
         while (correctDef.length > 0)
@@ -198,7 +237,7 @@ function runProgram(words)
             //Handles the case where a comma comes after the word or where the current word is the last
             if (correctDef.indexOf(",") != -1)
             {
-                var currentWord = correctDef.substring(0, correctDef.indexOf(","));	//The current English word
+                var currentWord = correctDef.substring(0, correctDef.indexOf(",")); //The current English word
                 
                 //Removes "to" from before verbs
                 if (currentWord.indexOf(" to") != -1)
@@ -211,12 +250,12 @@ function runProgram(words)
                 {
                     currentWord = currentWord.substring(1);
                 }
-                correctDef = correctDef.substring(correctDef.indexOf(",") + 1);	//Cuts the current word from the definition
+                correctDef = correctDef.substring(correctDef.indexOf(",") + 1); //Cuts the current word from the definition
             }
             else
             {
-                currentWord = correctDef;	//This is the last word so no splicing is necessary
-                correctDef = "";			//Makes definition of length 0
+                currentWord = correctDef;   //This is the last word so no splicing is necessary
+                correctDef = "";            //Makes definition of length 0
                 if (currentWord.indexOf(" to") != -1)
                 {
                     currentWord = currentWord.substring(currentWord.indexOf(" to") + 3);
@@ -233,6 +272,47 @@ function runProgram(words)
         return correctWords;
     }
 }
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+</script>
+
+<script type="text/javascript">
+    function printStudy()
+    {
+        var chapterAsString = "";
+
+        for (var i = 0; i < chapterWords.length; i++)
+        {
+            chapterAsString += chapterWords[i][0] + ": " + chapterWords[i][1] + "\n";
+        }
+
+        if (document.getElementById("study").innerText == chapterAsString)
+        {
+            document.getElementById("study").innerText = "";
+        }
+        else
+        {
+            document.getElementById("study").innerText = chapterAsString;
+            document.getElementById("study").style.color = "blue";
+        }
+    }
 </script>
 </body>
 </html>
