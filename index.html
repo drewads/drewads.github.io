@@ -2,18 +2,18 @@
 <html>
 <head>
     <script>
-        if (location.protocol != 'https:')
-        {
-            location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
-        }
+            if (location.protocol != 'https:')
+            {
+                location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+            }
     </script>
 	<title>Nosce Lingua Latina ē wadsworth.tech</title>
     <link rel="stylesheet" href="LatinVocabStyles.css">
     <link id="favicon" rel="icon" type="image/png" href="/favicons/faviconBlue-32x32.png" sizes="32x32"/>
 </head>
 <body>
-<!-- Version 0.5.2 -->
-<!-- Add: How many you got right/which ones to study, the study tool, submit button?, tool to study only the incorrect terms, more information/colors in the "correct" or "incorrect" display, "I was actually right" button-->
+<!-- Version 0.5.2b -->
+<!-- Add: How many you got right, submit button?, tool to study only the incorrect terms, more information/colors in the "correct" or "incorrect" display, "I was actually right" button-->
 <div class="top">
     <h1>Nosce Verba Latina!</h1>
 
@@ -67,15 +67,33 @@ var ch30SansMacrons = [
   ["impedimenta", "impedimentorum, n pl: baggage, baggage train"]
 ];
 
+var ch31 = [
+  ["aes","aeris, n: copper"],
+  ["commodē","conveniently, readily, easily, fitly"],
+  ["etsī","even if, although"],
+  ["intermittō","intermittere, intermīsī, intermissum: to send between, intervene, separate, cease, delay, neglect, let pass"],
+  ["obses","obsidis, c: hostage, pledge, security"]
+];
+
+var ch31SansMacrons = [
+  ["aes","aeris, n: copper"],
+  ["commode","conveniently, readily, easily, fitly"],
+  ["etsi","even if, although"],
+  ["intermitto","intermittere, intermisi, intermissum: to send between, intervene, separate, cease, delay, neglect, let pass"],
+  ["obses","obsidis, c: hostage, pledge, security"]
+];
+
 var chapters = [
     [ch27, "De Bello Gallico Chapter 27"],
     [ch28, "De Bello Gallico Chapter 28"],
     [ch29, "De Bello Gallico Chapter 29"],
     [ch30, "De Bello Gallico Chapter 30"],
-    [ch30SansMacrons, "De Bello Gallico Chapter 30: No Macrons"]
+    [ch30SansMacrons, "De Bello Gallico Chapter 30: No Macrons"],
+    [ch31, "De Bello Gallico Chapter 31"],
+    [ch31SansMacrons, "De Bello Gallico Chapter 31: No Macrons"]
 ];
 
-var chapterWords = ch30;
+var chapterWords = ch31SansMacrons;
 </script>
 
 <a href="http://www.cs.waikato.ac.nz/~tetaka/PDF/Macron%20Vowels%20on%20a%20Mac%2010.6-7.pdf"><p> To use macrons in this app, you will need to download the Māori keyboard. </p></a>
@@ -99,6 +117,20 @@ function createButton(value)
     x.appendChild(t);
     document.body.appendChild(x);
     x.id = value;
+    x.style.backgroundColor = "#555";
+    x.style.border = "none";
+    x.style.marginRight = "8px";
+    x.style.color = "white";
+    x.style.height = "32px";
+    x.style.marginTop = "16px";
+    x.onmouseover = function(){
+        x.style.border = "2px solid white";
+        x.style.padding = "2px 4px 3px";
+    };
+    x.onmouseout = function(){
+        x.style.border = "none";
+        x.style.padding = "2px 6px 3px";
+    };
     x.onclick = function(){
         for (var i = 0; i < chapters.length; i++)
         {
@@ -113,7 +145,7 @@ function createButton(value)
 }
 </script>
 
-<p id="currentChapter" style="margin-top: 32px; color: blue;">De Bello Gallico Chapter 30</p>
+<p id="currentChapter" style="margin-top: 32px; color: white;">De Bello Gallico Chapter 31: No Macrons</p>
 
 <button onclick="printStudy()">Study This Chapter</button>
 
@@ -310,7 +342,6 @@ function shuffle(array) {
         else
         {
             document.getElementById("study").innerText = chapterAsString;
-            document.getElementById("study").style.color = "blue";
         }
     }
 </script>

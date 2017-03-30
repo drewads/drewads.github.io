@@ -26,3 +26,13 @@ input[type=text]:focus
     outline: 0;
     margin-bottom: 0px;
 }
+
+body
+{
+    background-color: #ABABAB;
+}
+
+button:focus
+{
+    outline:0;
+}
