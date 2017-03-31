@@ -2,10 +2,10 @@
 <html>
 <head>
     <script>
-            if (location.protocol != 'https:')
+            /**if (location.protocol != 'https:')
             {
                 location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
-            }
+            }**/
     </script>
 	<title>Nosce Lingua Latina ē wadsworth.tech</title>
     <link rel="stylesheet" href="LatinVocabStyles.css">
@@ -23,6 +23,15 @@
 </div>
 
 <script type="text/javascript">
+var ch25SansMacrons = [
+  ["cunctor","1: to delay"],
+  ["dedecus","dedecoris, n: dishonor, disgrace"],
+  ["funda","fundae, f: sling"],
+  ["obtestor","1: to call to witness, beseech, entreat"],
+  ["pedem refero","referre, rettuli, relatum: to retreat"],
+  ["prodo","prodere, prodidi, proditum: to betray, reveal"]
+];
+
 var ch28 = [
   ["continēns", "continentis: continuous, unbroken"],
   ["nāvēs solvō", "solvere, solvī, solūtum: to set sail"],
@@ -84,6 +93,7 @@ var ch31SansMacrons = [
 ];
 
 var chapters = [
+    [ch25SansMacrons, "De Bello Gallico Chapter 25: No Macrons"],
     [ch27, "De Bello Gallico Chapter 27"],
     [ch28, "De Bello Gallico Chapter 28"],
     [ch29, "De Bello Gallico Chapter 29"],
@@ -93,7 +103,7 @@ var chapters = [
     [ch31SansMacrons, "De Bello Gallico Chapter 31: No Macrons"]
 ];
 
-var chapterWords = ch31SansMacrons;
+var chapterWords = ch25SansMacrons;
 </script>
 
 <a href="http://www.cs.waikato.ac.nz/~tetaka/PDF/Macron%20Vowels%20on%20a%20Mac%2010.6-7.pdf"><p> To use macrons in this app, you will need to download the Māori keyboard. </p></a>
@@ -145,7 +155,7 @@ function createButton(value)
 }
 </script>
 
-<p id="currentChapter" style="margin-top: 32px; color: white;">De Bello Gallico Chapter 31: No Macrons</p>
+<p id="currentChapter" style="margin-top: 32px; color: white;">De Bello Gallico Chapter 25: No Macrons</p>
 
 <button onclick="printStudy()">Study This Chapter</button>
 
@@ -215,8 +225,38 @@ function runProgram(words)
                 else
                 {
                     document.getElementById("reaction").innerText = "Incorrect. \n You said: " + words[i][0] + ": " + response + "\nCorrect: " + words[i][0] + ": " + words[i][1];
-                    document.getElementById("reaction").style.color = "red";
+                    document.getElementById("reaction").style.color = "#DE0000";
                     termsWrong.push(words[i][0] + ": " + words[i][1]);
+
+                    var x = document.createElement("BUTTON");
+                    var t = document.createTextNode("I was actually right");
+                    x.appendChild(t);
+                    document.body.appendChild(x);
+                    x.id = "I was actually right";
+                    x.style.backgroundColor = "#555";
+                    x.style.border = "none";
+                    x.style.marginRight = "8px";
+                    x.style.color = "white";
+                    x.style.height = "32px";
+                    x.style.marginTop = "16px";
+                    x.onmouseover = function(){
+                        x.style.border = "2px solid white";
+                        x.style.padding = "2px 4px 3px";
+                    };
+                    x.onmouseout = function(){
+                        x.style.border = "none";
+                        x.style.padding = "2px 6px 3px";
+                    };
+                    x.onclick = function(){
+                        termsWrong.pop();
+                        document.getElementById("reaction").innerText = "Good job! \n You said: " + words[i][0] + ": " + response;
+                        document.getElementById("reaction").style.color = "green";
+                        document.body.removeChild(x);
+                        if (document.getElementById("shouldStudy").innerText.length > 0)
+                        {
+                            document.getElementById("shouldStudy").innerText = "Well done. You got no words wrong!"
+                        }
+                    };
                 }
                 
                 entered = false;
