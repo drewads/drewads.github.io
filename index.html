@@ -2,24 +2,25 @@
 <html>
 <head>
     <script>
-            /**if (location.protocol != 'https:')
+            if (location.protocol != 'https:')
             {
                 location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
-            }**/
+            }
     </script>
 	<title>Nosce Lingua Latina ē wadsworth.tech</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="LatinVocabStyles.css">
     <link id="favicon" rel="icon" type="image/png" href="/favicons/faviconBlue-32x32.png" sizes="32x32"/>
 </head>
 <body>
-<!-- Version 0.5.2b -->
-<!-- Add: How many you got right, submit button?, tool to study only the incorrect terms, more information/colors in the "correct" or "incorrect" display, "I was actually right" button-->
+<!-- Version 0.6.0 -->
+<!-- Add: How many you got right, submit button?, tool to study only the incorrect terms, more information/colors in the "correct" or "incorrect" display-->
 <div class="top">
     <h1>Nosce Verba Latina!</h1>
 
-    <pre>This page is now a vocabulary studying app.
+    <p>This page is now a vocabulary studying app.<br>
     <a href="/main/">Click here to continue to wadsworth.tech proper.</a>
-    </pre>
+    </p>
 </div>
 
 <script type="text/javascript">
@@ -30,6 +31,15 @@ var ch25SansMacrons = [
   ["obtestor","1: to call to witness, beseech, entreat"],
   ["pedem refero","referre, rettuli, relatum: to retreat"],
   ["prodo","prodere, prodidi, proditum: to betray, reveal"]
+];
+
+var ch25 = [
+  ["cūnctor","1: to delay"],
+  ["dēdecus","dēdecoris, n: dishonor, disgrace"],
+  ["funda","fundae, f: sling"],
+  ["obtestor","1: to call to witness, beseech, entreat"],
+  ["pedem referō","referre, rettulī, relātum: to retreat"],
+  ["prōdō","prōdere, prōdidī, prōditum: to betray, reveal"]
 ];
 
 var ch28 = [
@@ -93,6 +103,7 @@ var ch31SansMacrons = [
 ];
 
 var chapters = [
+    [ch25, "De Bello Gallico Chapter 25"],
     [ch25SansMacrons, "De Bello Gallico Chapter 25: No Macrons"],
     [ch27, "De Bello Gallico Chapter 27"],
     [ch28, "De Bello Gallico Chapter 28"],
@@ -106,13 +117,7 @@ var chapters = [
 var chapterWords = ch25SansMacrons;
 </script>
 
-<a href="http://www.cs.waikato.ac.nz/~tetaka/PDF/Macron%20Vowels%20on%20a%20Mac%2010.6-7.pdf"><p> To use macrons in this app, you will need to download the Māori keyboard. </p></a>
-
-<p style="margin: 8px margin-left: 0px;">To get the answer correct, you must input at least one correct English meaning.</p>
-
-<p style="margin: 0px; margin-top: 16px;">How to use/examples:</p>
-<p style="margin: 0px;">Prompt: "emō" Enter: "emere, ēmī, emptum: to buy"</p>
-<p style="margin: 0px; margin-bottom: 16px;">Prompt: "finēs" Enter: "finium, n pl: territory"</p>
+<a href="http://www.cs.waikato.ac.nz/~tetaka/PDF/Macron%20Vowels%20on%20a%20Mac%2010.6-7.pdf" style="margin-top: 8px;"><p style="margin-top: inherit;"> To use macrons in this app, you will need to download the Māori keyboard.</p></a>
 
 <script type="text/javascript">
     for (var chaptersIndex = 0; chaptersIndex < chapters.length; chaptersIndex++)
@@ -155,16 +160,17 @@ function createButton(value)
 }
 </script>
 
-<p id="currentChapter" style="margin-top: 32px; color: white;">De Bello Gallico Chapter 25: No Macrons</p>
+<p id="currentChapter" style="margin-top: 32px; color: #555;">De Bello Gallico Chapter 25: No Macrons</p>
 
 <button onclick="printStudy()">Study This Chapter</button>
 
-<p id= "term" style= "margin-bottom: 0px;"> Term: </p>
-<p id="prompt" style= "margin-top: 0px;"></p>
+<p id="prompt" style= "margin-top: 32px; font-size: 32px; margin-bottom: 16px;"></p>
 
-<div class="inputBox">
-    <p style= "margin-bottom: 0px;">Answer:</p>
-    <input id="textInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+<div id="inputBox">
+<input id="textInput" placeholder="Answer" style="margin-right: 4px;" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+<span class="popup">
+<img src="info.ico" width="16" height="16" style="margin-bottom: 16px" onclick="openInfoWindow()">
+<span class="popupText" id="infoPopup" style="margin-bottom: 8px; margin-left: 12px; width: 400px; opacity: 0.5;" onclick="openInfoWindow()">To get the answer correct, you must input at least one correct English meaning.<br><br>Examples:<br>Prompt: "emō" Enter: "emere, ēmī, emptum: to buy"<br>Prompt: "finēs" Enter: "finium, n pl: territory"</span></span>
 </div>
 
 <p id="reaction" style="margin-top: 32px;"></p>
@@ -189,6 +195,8 @@ function runProgram(words)
     document.getElementById("shouldStudy").innerText = "";
     document.getElementById("study").innerText = "";
 
+    removeIWasRightButton();
+
     var entered = false;
 
     getInput(i);
@@ -208,6 +216,8 @@ function runProgram(words)
                 var definitionWords = getDefinitionWords(i);
 
                 var correctDefinition = false;
+
+                removeIWasRightButton();
 
                 for (var ind = 0; ind < definitionWords.length; ind++)
                 {
@@ -231,11 +241,13 @@ function runProgram(words)
                     var x = document.createElement("BUTTON");
                     var t = document.createTextNode("I was actually right");
                     x.appendChild(t);
-                    document.body.appendChild(x);
+                    var inputBox = document.getElementById("inputBox");
+                    inputBox.insertBefore(x, inputBox.childNodes[4]);
                     x.id = "I was actually right";
-                    x.style.backgroundColor = "#555";
+                    x.style.backgroundColor = "green";
                     x.style.border = "none";
                     x.style.marginRight = "8px";
+                    x.style.marginLeft = "2px";
                     x.style.color = "white";
                     x.style.height = "32px";
                     x.style.marginTop = "16px";
@@ -251,10 +263,11 @@ function runProgram(words)
                         termsWrong.pop();
                         document.getElementById("reaction").innerText = "Good job! \n You said: " + words[i][0] + ": " + response;
                         document.getElementById("reaction").style.color = "green";
-                        document.body.removeChild(x);
+                        inputBox.removeChild(x);
                         if (document.getElementById("shouldStudy").innerText.length > 0)
                         {
-                            document.getElementById("shouldStudy").innerText = "Well done. You got no words wrong!"
+                            termsWrongToString();
+                            document.body.removeChild(document.getElementById("Study these words"));
                         }
                     };
                 }
@@ -267,11 +280,15 @@ function runProgram(words)
                 }
                 else
                 {
-                    document.getElementById("term").innerText = "";
                     document.getElementById("prompt").innerText = "You are done.";
                     document.getElementById("textInput").value = "";
                     entered = true;
 
+                    termsWrongToString();
+                }
+
+                function termsWrongToString()
+                {
                     var termsWrongString = "";
                     for (var wrongI = 0; wrongI < termsWrong.length; wrongI++)
                     {
@@ -280,15 +297,54 @@ function runProgram(words)
                     if (termsWrongString.length > 0)
                     {
                         document.getElementById("shouldStudy").innerText = "You got the following words wrong: \n \n" + termsWrongString;
+                    
+                        var x = document.createElement("BUTTON");
+                        var t = document.createTextNode("Study these words");
+                        x.appendChild(t);
+                        document.body.appendChild(x);
+                        x.id = "Study these words";
+                        x.style.backgroundColor = "#DE0000";
+                        x.style.border = "none";
+                        x.style.marginRight = "8px";
+                        x.style.color = "white";
+                        x.style.height = "32px";
+                        x.style.marginTop = "16px";
+                        x.onmouseover = function(){
+                            x.style.border = "2px solid #555";
+                            x.style.padding = "2px 4px 3px";
+                        };
+                        x.onmouseout = function(){
+                            x.style.border = "none";
+                            x.style.padding = "2px 6px 3px";
+                        };
+                        x.onclick = function(){
+                            var termsWrongCorrectFormat = new Array();
+
+                            for (var i = 0; i < termsWrong.length; i++){
+                                var thisWord = new Array();
+                                thisWord[0] = termsWrong[i].substring(0, termsWrong[i].indexOf(": "));
+                                thisWord[1] = termsWrong[i].substring(termsWrong[i].indexOf(": ") + ": ".length);
+                                termsWrongCorrectFormat.push(thisWord);
+                            }
+                            runProgram(shuffle(termsWrongCorrectFormat));
+                            document.body.removeChild(x);
+                        };
                     }
                     else
                     {
                         document.getElementById("shouldStudy").innerText = "Well done. You got no words wrong!"
                     }
-                    
-                }
+                }    
             }
         };
+    }
+
+    function removeIWasRightButton()
+    {
+        if (document.getElementById("I was actually right") != null)
+        {
+            document.getElementById("inputBox").removeChild(document.getElementById("I was actually right"));
+        }
     }
 
     /**
@@ -331,7 +387,6 @@ function runProgram(words)
                 if (currentWord.indexOf(" to") != -1)
                 {
                     currentWord = currentWord.substring(currentWord.indexOf(" to") + 3);
-                    console.log(currentWord);
                 }
 
                 while (currentWord.indexOf(" ") == 0)
@@ -360,8 +415,13 @@ function shuffle(array) {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
   }
-
   return array;
+}
+
+function openInfoWindow()
+{
+    var info = document.getElementById("infoPopup");
+    info.classList.toggle("show");
 }
 </script>
 
