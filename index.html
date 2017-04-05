@@ -13,15 +13,19 @@
     <link id="favicon" rel="icon" type="image/png" href="/favicons/faviconBlue-32x32.png" sizes="32x32"/>
 </head>
 <body>
-<!-- Version 0.6.0 -->
-<!-- Add: How many you got right, submit button?, tool to study only the incorrect terms, more information/colors in the "correct" or "incorrect" display-->
+<!-- Version 0.6.0a -->
+<!-- Add: How many you got right, submit button?, more information/colors in the "correct" or "incorrect" display, local storage and user input, server side storage-->
 <div class="top">
     <h1>Nosce Verba Latina!</h1>
 
     <p>This page is now a vocabulary studying app.<br>
     <a href="/main/">Click here to continue to wadsworth.tech proper.</a>
     </p>
+    <p id="romanDate" style=" font-size: 30px; margin-bottom: 0px;"></p>
+    <p style="font-size: 10px; margin-top: 0px;">Thanks to Akshay for the Roman Date</p>
 </div>
+
+
 
 <script type="text/javascript">
 var ch25SansMacrons = [
@@ -102,19 +106,59 @@ var ch31SansMacrons = [
   ["obses","obsidis, c: hostage, pledge, security"]
 ];
 
+var ch32 = [
+    ["cōnfertus","cōnferta, cōnfertum: dense, thick, compact, stuffed"],
+    ["cōnfestim","hastily, at once, immediately"],
+    ["dēlitēscō","dēlitēscere, dēlituī: to hide oneself, lurk, (note: no 4th part)"],
+    ["essedum","essedī, n: two wheeled British war chariot"],
+    ["in statiōne esse","to be on guard"],
+    ["interpōnō","interpōnere, interposuī, interpositum: to interpose, allege, cause"]
+];
+
+var ch32SansMacrons = [
+    ["confertus","conferta, confertum: dense, thick, compact, stuffed"],
+    ["confestim","hastily, at once, immediately"],
+    ["delitesco","delitescere, delitui: to hide oneself, lurk, (note: no 4th part)"],
+    ["essedum","essedi, n: two wheeled British war chariot"],
+    ["in statione esse","to be on guard"],
+    ["interpono","interponere, interposui, interpositum: to interpose, allege, cause"]
+];
+
+var ch33 = [
+    ["dēclīvis","dēclīve: sloping downward, declining, noun: decline"],
+    ["īnsinuō","1: to wind into, make one's way into, penetrate"],
+    ["praeceps","praecipitis: headlong, steep, precipitous"],
+    ["receptus","receptūs, m: retreat, refuge, shelter"],
+    ["tēmō","tēmōnis, m: pole, (note: of a wagon)"],
+    ["turma","turmae, f: troop, squadron, (note: about 30 cavalrymen)"]
+];
+
+var ch33SansMacrons = [
+    ["declivis","declive: sloping downward, declining, noun: decline"],
+    ["insinuo","1: to wind into, make one's way into, penetrate"],
+    ["praeceps","praecipitis: headlong, steep, precipitous"],
+    ["receptus","receptus, m: retreat, refuge, shelter"],
+    ["temo","temonis, m: pole, (note: of a wagon)"],
+    ["turma","turmae, f: troop, squadron, (note: about 30 cavalrymen)"]
+];
+
 var chapters = [
     [ch25, "De Bello Gallico Chapter 25"],
     [ch25SansMacrons, "De Bello Gallico Chapter 25: No Macrons"],
-    [ch27, "De Bello Gallico Chapter 27"],
-    [ch28, "De Bello Gallico Chapter 28"],
-    [ch29, "De Bello Gallico Chapter 29"],
-    [ch30, "De Bello Gallico Chapter 30"],
-    [ch30SansMacrons, "De Bello Gallico Chapter 30: No Macrons"],
-    [ch31, "De Bello Gallico Chapter 31"],
-    [ch31SansMacrons, "De Bello Gallico Chapter 31: No Macrons"]
+    //[ch27, "De Bello Gallico Chapter 27"],
+    //[ch28, "De Bello Gallico Chapter 28"],
+    //[ch29, "De Bello Gallico Chapter 29"],
+    //[ch30, "De Bello Gallico Chapter 30"],
+    //[ch30SansMacrons, "De Bello Gallico Chapter 30: No Macrons"],
+    //[ch31, "De Bello Gallico Chapter 31"],
+    //[ch31SansMacrons, "De Bello Gallico Chapter 31: No Macrons"]
+    [ch32, "De Bello Gallico Chapter 32"],
+    [ch32SansMacrons, "De Bello Gallico Chapter 32: No Macrons"],
+    [ch33, "De Bello Gallico Chapter 33"],
+    [ch33SansMacrons, "De Bello Gallico Chapter 33: No Macrons"]
 ];
 
-var chapterWords = ch25SansMacrons;
+var chapterWords = ch33SansMacrons;
 </script>
 
 <a href="http://www.cs.waikato.ac.nz/~tetaka/PDF/Macron%20Vowels%20on%20a%20Mac%2010.6-7.pdf" style="margin-top: 8px;"><p style="margin-top: inherit;"> To use macrons in this app, you will need to download the Māori keyboard.</p></a>
@@ -160,7 +204,7 @@ function createButton(value)
 }
 </script>
 
-<p id="currentChapter" style="margin-top: 32px; color: #555;">De Bello Gallico Chapter 25: No Macrons</p>
+<p id="currentChapter" style="margin-top: 32px; color: #555;">De Bello Gallico Chapter 33: No Macrons</p>
 
 <button onclick="printStudy()">Study This Chapter</button>
 
@@ -445,5 +489,6 @@ function openInfoWindow()
         }
     }
 </script>
+<script type="text/javascript" src="RomanDate.js"></script>
 </body>
 </html>
