@@ -158,9 +158,25 @@ var ch35SansMacrons = [
 	["terga verto","vertere, verti, versum: to flee"]
 ];
 
+var bk5ch25 = [
+    ["maiōrēs","maiōrum, m: ancestors"],
+    ["nāscor","nāscī, nātus sum: to be born, be produced, rise, spring up, be raised, be found"],
+    ["operam dō","dare, dedī, datum: to give attention, take pains"],
+    ["palam","openly, publicly"],
+    ["vereor","verērī, veritus sum: to revere, fear, dread, be afraid of"]
+];
+
+var bk5ch25SansMacrons = [
+    ["maiores","maiorum, m: ancestors"],
+    ["nascor","nasci, natus sum: to be born, be produced, rise, spring up, be raised, be found"],
+    ["operam do","dare, dedi, datum: to give attention, take pains"],
+    ["palam","openly, publicly"],
+    ["vereor","vereri, veritus sum: to revere, fear, dread, be afraid of"]
+];
+
 var chapters = [
-    [ch25, "De Bello Gallico Chapter 25"],
-    [ch25SansMacrons, "De Bello Gallico Chapter 25: No Macrons"],
+    //[ch25, "De Bello Gallico Chapter 25"],
+    //[ch25SansMacrons, "De Bello Gallico Chapter 25: No Macrons"],
     //[ch27, "De Bello Gallico Chapter 27"],
     //[ch28, "De Bello Gallico Chapter 28"],
     //[ch29, "De Bello Gallico Chapter 29"],
@@ -173,10 +189,12 @@ var chapters = [
     [ch33, "De Bello Gallico Chapter 33"],
     [ch33SansMacrons, "De Bello Gallico Chapter 33: No Macrons"],
     [ch35, "De Bello Gallico Chapter 35-36.1"],
-    [ch35SansMacrons, "De Bello Gallico Chapter 35-36.1: No Macrons"]
+    [ch35SansMacrons, "De Bello Gallico Chapter 35-36.1: No Macrons"],
+    [bk5ch25, "De Bello Gallico Book 5 Chapter 25"],
+    [bk5ch25SansMacrons, "De Bello Gallico Book 5 Chapter 25: No Macrons"]
 ];
 
-var chapterWords = ch33SansMacrons;
+var chapterWords = bk5ch25SansMacrons;
 </script>
 
 <a href="http://www.cs.waikato.ac.nz/~tetaka/PDF/Macron%20Vowels%20on%20a%20Mac%2010.6-7.pdf" style="margin-top: 8px;"><p style="margin-top: inherit;"> To use macrons in this app, you will need to download the Māori keyboard.</p></a>
@@ -200,6 +218,7 @@ function createButton(value)
     x.style.color = "white";
     x.style.height = "32px";
     x.style.marginTop = "16px";
+    x.style.borderRadius = "25px";
     x.onmouseover = function(){
         x.style.border = "2px solid white";
         x.style.padding = "2px 4px 3px";
@@ -222,7 +241,7 @@ function createButton(value)
 }
 </script>
 
-<p id="currentChapter" style="margin-top: 32px; color: #555;">De Bello Gallico Chapter 33: No Macrons</p>
+<p id="currentChapter" style="margin-top: 32px; color: #555;">De Bello Gallico Book 5 Chapter 25: No Macrons</p>
 
 <button onclick="printStudy()">Study This Chapter</button>
 
