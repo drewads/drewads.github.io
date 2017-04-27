@@ -174,6 +174,38 @@ var bk5ch25SansMacrons = [
     ["vereor","vereri, veritus sum: to revere, fear, dread, be afraid of"]
 ];
 
+var bk5ch26 = [
+    ["lignātor","lignātoris, m: wood-forager"],
+    ["minuō","minuere, minuī, minūtum: to lessen, impair, diminish, settle"],
+    ["opprimō","opprimere, oppressī, oppressum: to press down, destroy, surprise"],
+    ["repentīnus","repentīna, repentīnum: sudden, unexpected, hasty"],
+    ["vāllum","vāllī, n: wall, rampart, entrenchments, earthworks"]
+];
+
+var bk5ch26SansMacrons = [
+    ["lignator","lignatoris, m: wood-forager"],
+    ["minuo","minuere, minui, minutum: to lessen, impair, diminish, settle"],
+    ["opprimo","opprimere, oppressi, oppressum: to press down, destroy, surprise"],
+    ["repentinus","repentina, repentinum: sudden, unexpected, hasty"],
+    ["vallum","valli, n: wall, rampart, entrenchments, earthworks"]
+];
+
+var bk5ch27 = [
+    ["bīduum","bīduī, n: space or period of two days"],
+    ["meritum","meritī, n: service, desert, merit, favor, kindness, benefit"],
+    ["pendō","pendere, pependī, pēnsum: to weigh, weigh out, pay, pay out"],
+    ["porrō","farther on, furthermore, then"],
+    ["stīpendium","stīpendiī, n: tax, tribute"]
+];
+
+var bk5ch27SansMacrons = [
+    ["biduum","bidui, n: space or period of two days"],
+    ["meritum","meriti, n: service, desert, merit, favor, kindness, benefit"],
+    ["pendo","pendere, pependi, pensum: to weigh, weigh out, pay, pay out"],
+    ["porro","farther on, furthermore, then"],
+    ["stipendium","stipendii, n: tax, tribute"]
+];
+
 var chapters = [
     //[ch25, "De Bello Gallico Chapter 25"],
     //[ch25SansMacrons, "De Bello Gallico Chapter 25: No Macrons"],
@@ -186,15 +218,19 @@ var chapters = [
     //[ch31SansMacrons, "De Bello Gallico Chapter 31: No Macrons"]
     //[ch32, "De Bello Gallico Chapter 32"],
     //[ch32SansMacrons, "De Bello Gallico Chapter 32: No Macrons"],
-    [ch33, "De Bello Gallico Chapter 33"],
-    [ch33SansMacrons, "De Bello Gallico Chapter 33: No Macrons"],
-    [ch35, "De Bello Gallico Chapter 35-36.1"],
-    [ch35SansMacrons, "De Bello Gallico Chapter 35-36.1: No Macrons"],
+    //[ch33, "De Bello Gallico Chapter 33"],
+    //[ch33SansMacrons, "De Bello Gallico Chapter 33: No Macrons"],
+    //[ch35, "De Bello Gallico Chapter 35-36.1"],
+    //[ch35SansMacrons, "De Bello Gallico Chapter 35-36.1: No Macrons"],
     [bk5ch25, "De Bello Gallico Book 5 Chapter 25"],
-    [bk5ch25SansMacrons, "De Bello Gallico Book 5 Chapter 25: No Macrons"]
+    [bk5ch25SansMacrons, "De Bello Gallico Book 5 Chapter 25: No Macrons"],
+    [bk5ch26, "De Bello Gallico Book 5 Chapter 26"],
+    [bk5ch26SansMacrons, "De Bello Gallico Book 5 Chapter 26: No Macrons"],
+    [bk5ch27, "De Bello Gallico Book 5 Chapter 27"],
+    [bk5ch27SansMacrons, "De Bello Gallico Book 5 Chapter 27: No Macrons"]
 ];
 
-var chapterWords = bk5ch25SansMacrons;
+var chapterWords = bk5ch27SansMacrons;
 </script>
 
 <a href="http://www.cs.waikato.ac.nz/~tetaka/PDF/Macron%20Vowels%20on%20a%20Mac%2010.6-7.pdf" style="margin-top: 8px;"><p style="margin-top: inherit;"> To use macrons in this app, you will need to download the Māori keyboard.</p></a>
@@ -241,7 +277,7 @@ function createButton(value)
 }
 </script>
 
-<p id="currentChapter" style="margin-top: 32px; color: #555;">De Bello Gallico Book 5 Chapter 25: No Macrons</p>
+<p id="currentChapter" style="margin-top: 32px; color: #555;">De Bello Gallico Book 5 Chapter 27: No Macrons</p>
 
 <button onclick="printStudy()">Study This Chapter</button>
 
