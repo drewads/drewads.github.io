@@ -3,7 +3,8 @@ createHead();
 setBodyStyle();
 createTop();
 makeStudyListButtons();
-let currentStudyList = shuffle(getStudyList(null)[0][1]);	//Initial list to be studied
+let listOfLists = getStudyList(null);
+let currentStudyList = shuffle(listOfLists[listOfLists.length - 1][1]);	//Initial list to be studied
 let changeStudyList = displayCurrentStudyList();
 createStudyButton();
 let changePrompt = displayPrompt();
@@ -724,6 +725,22 @@ function getStudyList(chapterID)
 	    ["vallum","valli, n: wall, rampart, entrenchments, earthworks"]
 	];
 
+	let bk5ch28 = [
+		["ignōbilis","ignōbile: unknown, undistinguished"],
+		["iniussū","without command or order"],
+		["rēs frūmentāria","reī frūmentāriae, f: grain supply, provisions"],
+		["spontis or sponte","of one's own accord, willingly"],
+		["turpis","turpe: ugly, unseemly, shameful, disgraceful, dishonorable"]
+	];
+
+	let bk5ch28SansMacrons = [
+		["ignōbilis","ignōbile: unknown, undistinguished"],
+		["iniussū","without command or order"],
+		["rēs frūmentāria","reī frūmentāriae, f: grain supply, provisions"],
+		["spontis or sponte","of one's own accord, willingly"],
+		["turpis","turpe: ugly, unseemly, shameful, disgraceful, dishonorable"]
+	];
+
 	let chapters = [
 	    [bk4ch25, "De Bello Gallico Book 4 Chapter 25"],
 	    [bk4ch25SansMacrons, "De Bello Gallico Book 4 Chapter 25: No Macrons"],
@@ -736,7 +753,9 @@ function getStudyList(chapterID)
 	    [bk5ch25, "De Bello Gallico Book 5 Chapter 25"],
 	    [bk5ch25SansMacrons, "De Bello Gallico Book 5 Chapter 25: No Macrons"],
 	    [bk5ch26, "De Bello Gallico Book 5 Chapter 26"],
-	    [bk5ch26SansMacrons, "De Bello Gallico Book 5 Chapter 26: No Macrons"]
+	    [bk5ch26SansMacrons, "De Bello Gallico Book 5 Chapter 26: No Macrons"],
+	    [bk5ch28, "De Bello Gallico Book 5 Chapter 28"],
+	    [bk5ch28SansMacrons, "De Bello Gallico Book 5 Chapter 28: No Macrons"]
 	];
 
 	if (chapterID == null)
