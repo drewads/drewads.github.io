@@ -1,4 +1,4 @@
-//v0.7.0
+//v0.7.0a
 createHead();
 setBodyStyle();
 createTop();
@@ -27,7 +27,7 @@ runProgram(currentStudyList);
 * This function creates the HTML in the <head>
 **/
 function createHead(){
-	changeToHTTPS();
+	//changeToHTTPS();
 	createTitle("Nosce Lingua Latina ē wadsworth.tech");
 	createLinks("/favicons/faviconBlue-32x32.png");
 
@@ -727,16 +727,16 @@ function getStudyList(chapterID)
 
 	let bk5ch28 = [
 		["ignōbilis","ignōbile: unknown, undistinguished"],
-		["iniussū","without command or order"],
+		["iniussū","without command, without order"],
 		["rēs frūmentāria","reī frūmentāriae, f: grain supply, provisions"],
 		["spontis or sponte","of one's own accord, willingly"],
 		["turpis","turpe: ugly, unseemly, shameful, disgraceful, dishonorable"]
 	];
 
 	let bk5ch28SansMacrons = [
-		["ignōbilis","ignōbile: unknown, undistinguished"],
-		["iniussū","without command or order"],
-		["rēs frūmentāria","reī frūmentāriae, f: grain supply, provisions"],
+		["ignobilis","ignobile: unknown, undistinguished"],
+		["iniussu","without command, without order"],
+		["res frumentaria","rei frumentariae, f: grain supply, provisions"],
 		["spontis or sponte","of one's own accord, willingly"],
 		["turpis","turpe: ugly, unseemly, shameful, disgraceful, dishonorable"]
 	];
