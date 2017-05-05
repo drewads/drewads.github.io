@@ -1,33 +1,12 @@
-//v0.7.0a
+//v0.8.0
 createHead();
-setBodyStyle();
-createTop();
-makeStudyListButtons();
-let listOfLists = getStudyList(null);
-let currentStudyList = shuffle(listOfLists[listOfLists.length - 1][1]);	//Initial list to be studied
-let changeStudyList = displayCurrentStudyList();
-createStudyButton();
-let changePrompt = displayPrompt();
-let getInputBox = createInputBox();
-let getPopup = displayPopup();
-
-let inputBoxDiv = document.createElement("DIV");
-inputBoxDiv.appendChild(getInputBox());
-inputBoxDiv.appendChild(getPopup());
-inputBoxDiv.id = "inputBox";
-document.body.appendChild(inputBoxDiv);
-
-displayReaction();
-displayWordsToStudy();
-createWordsToStudyButton();
-displayWordsStudying();
-runProgram(currentStudyList);
+createBody();
 
 /**
 * This function creates the HTML in the <head>
 **/
 function createHead(){
-	//changeToHTTPS();
+	changeToHTTPS();
 	createTitle("Nosce Lingua Latina ē wadsworth.tech");
 	createLinks("/favicons/faviconBlue-32x32.png");
 
@@ -70,549 +49,903 @@ function createHead(){
 	}
 }
 
-/**
-* This function sets the common style for the entire body
-**/
-function setBodyStyle(){
-	document.body.style.backgroundColor = "#F2F2F2";
-	document.body.style.fontFamily = "'Lato', sans-serif";
-}
+/*
+* This function creates the html in the <body> and contains all of the actual
+* scripting for this program.
+*/
+function createBody(){
+	setBodyStyle();
+	createTop();
 
-/**
-* This function creates the HTML for the "top" div - the intro text at the top of the page
-**/
-function createTop(){
-	//Div element for this group of elements
-	let topDiv = document.createElement("DIV");
-	topDiv.class = "top";
-	document.body.appendChild(topDiv);
-	
-	//Very top text
-	let topHeader = document.createElement("h1");
-    topHeader.appendChild(document.createTextNode("Nosce Verba Latina!"));
-    topDiv.appendChild(topHeader);
+	let listOfLists = getStudyList(null);
+	let currentStudyList = shuffle(listOfLists[listOfLists.length - 1][1]);	//Initial list to be studied
+	let getModal = createStudyListSearchPage();
+	createModalButton();
 
-    //Paragraph just below the top
-    let subHeader = document.createElement("p");
-    subHeader.appendChild(document.createTextNode("This page is now a vocabulary studying app."));
-    subHeader.style.marginBottom = "0px";
-    topDiv.appendChild(subHeader);
+	let changeStudyList = displayCurrentStudyList();
+	createStudyButton();
+	let changePrompt = displayPrompt();
 
-    //Complement element to subHeader - links to wadsworth.tech/main
-    let linkToMain = document.createElement("a");
-    linkToMain.href = "/main/";
-    linkToMain.appendChild(document.createTextNode("Click here to continue to wadsworth.tech proper."));
-    topDiv.appendChild(linkToMain);
+	let answerField = createAnswerField();
+	createAnswerFieldDiv(answerField, createInfoPopup());
 
-    //Display Roman date
-    let latinDate = document.createElement("p");
-    latinDate.appendChild(document.createTextNode(getRomanDate()));
-    latinDate.style.fontSize = "30px";
-    latinDate.style.marginBottom = "0px";
-    topDiv.appendChild(latinDate);
+	createReaction();
+	displayWordsToStudy();
+	createWordsToStudyButton();
+	displayWordsStudying();
 
-    //Attribute Roman date to Akshay
-    let akshay = document.createElement("p");
-    akshay.appendChild(document.createTextNode("Thanks to Akshay for the Roman date"));
-    akshay.style.fontSize = "10px";
-    akshay.style.marginTop = "0px";
-    topDiv.appendChild(akshay);
+	runProgram(currentStudyList);
 
-    //Style
-    topDiv.style.textAlign = "center";
-}
+	/**
+	* This function sets the common style for the entire body
+	**/
+	function setBodyStyle(){
+		document.body.style.backgroundColor = "#F2F2F2";
+		document.body.style.fontFamily = "'Lato', sans-serif";
+	}
 
-/**
-* Creates the button HTML elements that toggle which word list
-* is to be studied.
-**/
-function makeStudyListButtons(){
-	let chapters = getStudyList(null);
+	/**
+	* This function creates the HTML for the "top" div - the intro text at the top of the page
+	**/
+	function createTop(){
+		//Div element for this group of elements
+		let topDiv = document.createElement("DIV");
+		topDiv.class = "top";
+		document.body.appendChild(topDiv);
+		
+		//Very top text
+		let topHeader = document.createElement("h1");
+	    topHeader.appendChild(document.createTextNode("Nosce Verba Latina!"));
+	    topDiv.appendChild(topHeader);
 
-	//Adds the study list buttons
-	for (let chaptersIndex = 0; chaptersIndex < chapters.length; chaptersIndex++){
-	    let currentButton = createButton(chapters[chaptersIndex][1], "#555", "2px solid #F2F2F2");
-	    document.body.appendChild(currentButton);
-	    
-	    currentButton.onclick = function(){
-	        for (let i = 0; i < chapters.length; i++){
-	            //Changes studied word list to that associated with this button
-	            if (currentButton.id == chapters[i][1]){
-	                currentStudyList = shuffle(chapters[i][0]);
-	                changeStudyList(chapters[i][1]);
-	                changePrompt(0, true);
-	                document.getElementById("reaction").innerText = "";
-	                document.getElementById("shouldStudy").innerText = "";
-	                document.getElementById("study").innerText = "";
-	                document.getElementById("Study these words").style.display = "none";
-	            }
+	    //Paragraph just below the top
+	    let subHeader = document.createElement("p");
+	    subHeader.appendChild(document.createTextNode("This page is now a vocabulary studying app."));
+	    subHeader.style.marginBottom = "0px";
+	    topDiv.appendChild(subHeader);
+
+	    //Complement element to subHeader - links to wadsworth.tech/main
+	    let linkToMain = document.createElement("a");
+	    linkToMain.href = "/main";
+	    linkToMain.appendChild(document.createTextNode("Click here to continue to wadsworth.tech proper."));
+	    topDiv.appendChild(linkToMain);
+
+	    //Display Roman date
+	    let latinDate = document.createElement("p");
+	    latinDate.appendChild(document.createTextNode(getRomanDate()));
+	    latinDate.style.fontSize = "30px";
+	    latinDate.style.marginBottom = "0px";
+	    topDiv.appendChild(latinDate);
+
+	    //Attribute Roman date to Akshay
+	    let akshay = document.createElement("p");
+	    akshay.appendChild(document.createTextNode("Thanks to Akshay for the Roman date"));
+	    akshay.style.fontSize = "10px";
+	    akshay.style.marginTop = "0px";
+	    topDiv.appendChild(akshay);
+
+	    //Style
+	    topDiv.style.textAlign = "center";
+	}
+
+	/*
+	* This function creates the html for the modal box of study list buttons
+	* and its children. It also contains the scripting for searching the lists
+	* and the button onclick events.
+	*/
+	function createStudyListSearchPage(){
+		
+		return createModal();
+
+		/*
+		* This function creates the html for the modal box of study list
+		* buttons and its children, and it adds the display attributes/
+		* function to close the modals.
+		*/
+		function createModal(){
+			let modal = document.createElement("modal");	//The actual modal box
+			let opacityBehindModal = document.createElement("modal");	//The shaded area behind the modal box
+			styleModal(modal, opacityBehindModal);
+			let searchBox = createSearchField(modal);	//The search field
+			let listArea = document.createElement("DIV");	//Div parent to study list buttons
+
+			listArea.id = "listArea";
+			modal.appendChild(listArea);
+			makeStudyListButtons(getStudyList(null), listArea);
+
+			//The modal system is initially unseen
+			opacityBehindModal.style.display = "none";
+			modal.style.display = "none";
+
+			//Closes the modal system when user clicks on partially opaque modal
+			opacityBehindModal.onclick = function(){
+				modal.style.display = "none";
+				opacityBehindModal.style.display = "none";
+			}
+
+			//Allows other methods to access the modal system
+			function getModal(isBackground){
+				if (isBackground)
+					return opacityBehindModal;
+				else return modal;
+			}
+			
+			document.body.appendChild(modal);
+			document.body.appendChild(opacityBehindModal);
+
+			return getModal;
+		}
+		
+		/*
+		* This function adds styling to the modal box of study list buttons
+		* and the opaque gray modal behind it.
+		*/
+		function styleModal(modal, opacityBehindModal){
+			opacityBehindModal.style.zIndex = "2";
+			opacityBehindModal.style.position = "fixed";
+			opacityBehindModal.style.left = "0";
+			opacityBehindModal.style.top = "0";
+			opacityBehindModal.style.width = "100%";
+			opacityBehindModal.style.height = "100%";
+			opacityBehindModal.style.overflow = "auto";
+			opacityBehindModal.style.backgroundColor = "gray";
+			opacityBehindModal.style.opacity = "0.5";
+
+			modal.style.zIndex = "3";
+			modal.style.position = "fixed";
+			modal.style.left = "10%";
+			modal.style.top = "10%";
+			modal.style.width = "80%";
+			modal.style.height = "80%";
+			modal.style.overflow = "auto";
+			modal.style.backgroundColor = "white";
+			modal.style.borderRadius = "16px";
+			modal.style.padding = "5px";
+			modal.style.textAlign = "center";
+		}
+
+		/*
+		* This function creates the html for the field to search study lists.
+		*/
+		function createSearchField(studyListModal){
+			let search = document.createElement("INPUT");
+			styleSearchField(search);
+
+			//Adds the search field to the study list modal
+			studyListModal.appendChild(search);
+
+			//Actually runs the search command
+			searchLists(search);
+
+			return search;
+		}
+
+		/*
+		* This function creates the styling for the search field used to
+		* search for study lists.
+		*/
+		function styleSearchField(search){
+			search.placeholder = "Search";
+			search.autocomplete = "off";
+			search.autocorrect = "off";
+			search.autocaptalize = "off";
+			search.spellcheck = false;
+
+			search.style.width = "60%";
+			search.style.height = "30px";
+			search.style.padding = "12px 20px";
+			search.style.margin = "auto";
+			search.style.marginTop = "4px";
+			search.style.marginBottom = "4px";
+			search.style.border = "1px solid #ccc";
+			search.style.borderRadius = "20px";
+			search.style.boxSizing = "border-box";
+			search.style.fontSize = "16px";
+			search.style.backgroundColor = "white";
+			search.style.display = "block";
+
+			search.onfocus = function(){
+				search.style.outline = "0";
+			}
+		}
+
+		/*
+		* This function takes input from the text field search on each keyup
+		* and runs a search for the study lists that are the best match to
+		* the value of the search field. It then displays the applicable
+		* button elements in the correct order.
+		*/
+		function searchLists(search){
+			let keyWords;	//Array of individual words from the search field
+
+			search.onkeyup = function(e){
+				displayFoundStudyLists(augmentListOfStudyLists(findNumKeywordHits(keyWords, search)));
+			};
+		}
+
+		/*
+		* This function returns an array that contains the id of each study list
+		* and its corresponding number of keyword hits in arrays of length two.
+		*/
+		function findNumKeywordHits(keyWords, searchField){
+			let orderedLists = new Array();	//list of applicable study lists
+			keyWords = getIndividualWords(searchField.value.toLowerCase());
+
+			//Finds the number of times each keyword shows up in the title of each study list
+			for (let i = 0; i < listOfLists.length; i++){
+				let numFound = 0;	//Number of keyword hits found
+				
+				for (let j = 0; j < keyWords.length; j++){
+					let currentString = listOfLists[i][1].toLowerCase();	//The title of the current study list
+					
+					//find each instance of each keyword
+					while(currentString.indexOf(keyWords[j]) != -1){
+						numFound++;
+						currentString = currentString.substring(currentString.indexOf(keyWords[j]) + keyWords[j].length);
+					}	
+				}
+				orderedLists.push([listOfLists[i][1], numFound]);	//Associates each list with its number of hits
+			}
+
+			return orderedLists;
+		}
+
+		/*
+		* This function both removes study lists with no keyword hits at all from
+		* the array orderedLists and sorts orderedLists by the number of keyword
+		* hits.
+		*/
+		function augmentListOfStudyLists(orderedLists){
+			//Removes study lists with no keyword hits at all
+			for (let i = 0; i < orderedLists.length;){
+				if (orderedLists[i][1] == 0)
+				{
+					orderedLists.splice(i, 1);
+				}
+				else i++;
+			}
+
+			//Sorts the study lists by number of hits - largest to smallest
+			orderedLists.sort(function(a, b) {
+   				return b[1] - a[1];
+ 			});
+
+ 			return orderedLists;
+		}
+
+		/*
+		* This function displays the study lists that match the search keywords in the
+		* correct order, and if no lists match, it displays all of the lists in their
+		* original order.
+		*/
+		function displayFoundStudyLists(orderedLists){
+			let listArea = document.getElementById("listArea");
+
+			//Clear the study list button parent div
+			while (listArea.hasChildNodes()){
+				listArea.removeChild(listArea.firstChild);
+			}
+
+			let currentButtonList = new Array();	//The list of study lists post search
+
+			//Fills the list of study lists with the actual study lists
+			for (let i = 0; i < orderedLists.length; i++){
+				for (let j = 0; j < getStudyList(null).length; j++){
+					if (orderedLists[i][0] === getStudyList(null)[j][1]){
+						currentButtonList.push(getStudyList(null)[j]);
+					}
+				}
+			}
+
+			//Display results
+			if (currentButtonList.length == 0)
+			{
+				makeStudyListButtons(getStudyList(null), listArea)
+			}
+			else
+			{
+				makeStudyListButtons(currentButtonList, listArea);
+			}
+		}
+
+		/*
+		* This function creates and returns an array that contains
+		* the individual words found in the parameter string.
+		*/
+		function getIndividualWords(string){
+			let words = new Array();
+
+			let nextSpace = string.indexOf(" ");
+			
+			//Takes words off of string that are split by a space
+			while (nextSpace != -1){
+				words.push(string.substring(0, nextSpace));
+				if (string.length > 0){
+					string = string.substring(nextSpace + 1);
+				}
+				nextSpace = string.indexOf(" ");
+			}
+			
+			if (string.length > 0){
+				words.push(string);
+			}
+
+			return words;
+		}
+
+		/**
+		* Creates the button HTML elements that toggle which word list
+		* is to be studied.
+		**/
+		function makeStudyListButtons(chapters, buttonParent){
+
+			//Adds the study list buttons
+			for (let chaptersIndex = 0; chaptersIndex < chapters.length; chaptersIndex++){
+			    let currentButton = createButton(chapters[chaptersIndex][1], "#555", "2px solid white");
+			    buttonParent.appendChild(currentButton);
+			    
+			    currentButton.onclick = function(){
+			        for (let i = 0; i < chapters.length; i++){
+			            //Changes studied word list to that associated with this button
+			            if (currentButton.id == chapters[i][1]){
+			                currentStudyList = shuffle(chapters[i][0]);
+			                changeStudyList(chapters[i][1]);
+			                changePrompt(0, true);
+			                document.getElementById("reaction").innerText = "";
+			                document.getElementById("shouldStudy").innerText = "";
+			                document.getElementById("study").innerText = "";
+			                document.getElementById("Study these words").style.display = "none";
+			            }
+			        }
+			        runProgram(currentStudyList);
+			        getModal(false).style.display = "none";
+			        getModal(true).style.display = "none";
+			    };
+			}
+		}
+	}
+
+	/*
+	* This function creates the button that opens the modal box containing the study
+	* list buttons.
+	*/
+	function createModalButton()
+	{
+		let modalButton = createButton("Change Chapter", "#555", "2px solid #F2F2F2");
+
+		modalButton.onclick = function(){
+			getModal(true).style.display = "initial";
+			getModal(false).style.display = "initial";
+		}
+
+		document.body.appendChild(modalButton);
+	}
+
+	/**
+	* This function displays the id of the study list being
+	* studied. It returns a function that allows the study
+	* list to be changed.
+	**/
+	function displayCurrentStudyList(){
+		let currentListName = document.createElement("p");
+		changeList(currentStudyList);
+
+		//Style
+		currentListName.style.color = "#555";
+
+		document.body.appendChild(currentListName);
+
+		function changeList(newName){
+			currentListName.innerText = newName;
+			currentStudyList = shuffle(getStudyList(newName)[0]);
+		}
+
+		return changeList;
+	}
+
+	/**
+	* This function creates the button that prints the current study list on click.
+	**/
+	function createStudyButton(){
+		let studyButton = createButton("Study This Chapter", "DarkViolet", "2px solid #F2F2F2");
+
+		//style
+		studyButton.style.marginTop = "0px";
+		
+		studyButton.onclick = function(){
+			let chapterWords = currentStudyList;
+			let chapterAsString = "";
+
+	        for (let i = 0; i < chapterWords.length; i++)
+	        {
+	            chapterAsString += chapterWords[i][0] + ": " + chapterWords[i][1] + "\n";
 	        }
-	        runProgram(currentStudyList);
-	    };
-	}
-}
 
-/**
-*
-**/
-function displayCurrentStudyList(){
-	let currentListName = document.createElement("p");
-	changeList(currentStudyList);
-
-	//Style
-	currentListName.style.color = "#555";
-
-	document.body.appendChild(currentListName);
-
-	function changeList(newName){
-		currentListName.innerText = newName;
-		currentStudyList = shuffle(getStudyList(newName)[0]);
-	}
-
-	return changeList;
-}
-
-/**
-* 
-**/
-function createStudyButton(){
-	let studyButton = createButton("Study This Chapter", "DarkViolet", "2px solid #F2F2F2");
-
-	//style
-	studyButton.style.marginTop = "0px";
-	
-	studyButton.onclick = function(){
-		let chapterWords = currentStudyList;
-		let chapterAsString = "";
-
-        for (let i = 0; i < chapterWords.length; i++)
-        {
-            chapterAsString += chapterWords[i][0] + ": " + chapterWords[i][1] + "\n";
-        }
-
-        if (document.getElementById("study").innerText == chapterAsString)
-        {
-            document.getElementById("study").innerText = "";
-        }
-        else
-        {
-            document.getElementById("study").innerText = chapterAsString;
-        }
-	}
-
-	document.body.appendChild(studyButton);
-}
-
-/**
-* I think to correctly write this youll need to make the current study list a global variable
-**/
-function displayPrompt(){
-	let prompt = document.createElement("p");
-
-	prompt.style.fontSize = "32px";
-	prompt.style.marginTop = "24px";
-	prompt.style.marginBottom = "16px";
-
-	changePrompt(0, true);
-
-	document.body.appendChild(prompt);
-
-	function changePrompt(listIndex, isIndex){
-		if (isIndex){
-			prompt.innerText = currentStudyList[listIndex][0];
+	        if (document.getElementById("study").innerText == chapterAsString)
+	        {
+	            document.getElementById("study").innerText = "";
+	        }
+	        else
+	        {
+	            document.getElementById("study").innerText = chapterAsString;
+	        }
 		}
-		else{
-			prompt.innerText = listIndex;
+
+		document.body.appendChild(studyButton);
+	}
+
+	/**
+	* This function displays the prompt for the current word being studied.
+	**/
+	function displayPrompt(){
+		let prompt = document.createElement("p");
+
+		prompt.style.fontSize = "32px";
+		prompt.style.marginTop = "24px";
+		prompt.style.marginBottom = "16px";
+
+		changePrompt(0, true);
+
+		document.body.appendChild(prompt);
+
+		function changePrompt(listIndex, isIndex){
+			if (isIndex){
+				prompt.innerText = currentStudyList[listIndex][0];
+			}
+			else{
+				prompt.innerText = listIndex;
+			}
 		}
+
+		return changePrompt;
+
 	}
 
-	return changePrompt;
+	/**
+	* This function creates the input field for the user to
+	* enter their answer. It returns the answer field DOM object.
+	**/
+	function createAnswerField(){
+		let inputBox = document.createElement("INPUT");
+		inputBox.placeholder = "Answer";
+		inputBox.autocomplete = "off";
+		inputBox.autocorrect = "off";
+		inputBox.autocaptalize = "off";
+		inputBox.spellcheck = false;
 
-}
-
-/**
-*
-**/
-function createInputBox(){
-	let inputBox = document.createElement("INPUT");
-	inputBox.placeholder = "Answer";
-	inputBox.autocomplete = "off";
-	inputBox.autocorrect = "off";
-	inputBox.autocaptalize = "off";
-	inputBox.spellcheck = false;
-
-	//Style for Input Box
-	inputBox.style.width = "400px";
-	inputBox.style.padding = "12px 20px";
-	inputBox.style.margin = "0px 0";
-	inputBox.style.marginBottom = "4px";
-	inputBox.style.border = "1px solid #ccc";
-	inputBox.style.borderRadius = "4px";
-	inputBox.style.boxSizing = "border-box";
-	inputBox.style.fontSize = "18px";
-	inputBox.style.backgroundColor = "#F2F2F2";
-
-	inputBox.onfocus = function(){
-		inputBox.style.border = "3px solid #555";
-		inputBox.style.marginBottom = "2px";
-		inputBox.style.outline = "0";
-		inputBox.style.paddingTop = "10px";
-		inputBox.style.paddingLeft = "18px";
-	}
-
-	inputBox.onblur = function(){
-		inputBox.style.border = "1px solid #ccc";
+		//Style for Input Box
+		inputBox.style.width = "400px";
+		inputBox.style.padding = "12px 20px";
+		inputBox.style.margin = "0px 0";
 		inputBox.style.marginBottom = "4px";
-		inputBox.style.outline = "0";
-		inputBox.style.paddingTop = "12px";
-		inputBox.style.paddingLeft = "20px";
-	}
+		inputBox.style.border = "1px solid #ccc";
+		inputBox.style.borderRadius = "4px";
+		inputBox.style.boxSizing = "border-box";
+		inputBox.style.fontSize = "18px";
+		inputBox.style.backgroundColor = "#F2F2F2";
 
-	return function(){
+		inputBox.onfocus = function(){
+			inputBox.style.border = "3px solid #555";
+			inputBox.style.marginBottom = "2px";
+			inputBox.style.outline = "0";
+			inputBox.style.paddingTop = "10px";
+			inputBox.style.paddingLeft = "18px";
+		}
+
+		inputBox.onblur = function(){
+			inputBox.style.border = "1px solid #ccc";
+			inputBox.style.marginBottom = "4px";
+			inputBox.style.outline = "0";
+			inputBox.style.paddingTop = "12px";
+			inputBox.style.paddingLeft = "20px";
+		}
+
 		return inputBox;
 	}
-}
 
-function displayPopup(){
-	let span = document.createElement("span");
-	let infoIcon = document.createElement("IMG");
-	let popup = document.createElement("span");
+	/*
+	* This function creates the information popup and info icon
+	* that opens the popup on click.
+	*/
+	function createInfoPopup(){
+		let span = document.createElement("span");
+		let infoIcon = document.createElement("IMG");
+		let popup = document.createElement("span");
 
-	span.style.position = "relative";
-	span.style.cursor = "pointer";
-	span.style.userSelect = "none";
-	span.id = "popupSpan";
+		stylePopup(span, infoIcon, popup);
 
-	popup.style.visibility = "hidden";
-	popup.style.width = "160px";
-	popup.style.backgroundColor = "#555";
-	popup.style.color = "#fff";
-	popup.style.textAlign = "center";
-	popup.style.borderRadius = "6px";
-	popup.style.padding = "8px 0";
-	popup.style.position = "absolute";
-	popup.style.zIndex = "1";
-	popup.style.bottom = "125%";
-	popup.style.left = "50%";
-	popup.style.marginLeft = "-80px";
+		popup.innerText = "To get the answer correct, you must input at least one correct English meaning.\nExemplī grātiā: \nPrompt: \"emō\" Enter: \"emere, ēmī, emptum: to buy\"\nPrompt: \"finēs\" Enter: \"finium, n pl: territory\"";
 
-	popup.style.marginBottom = "8px";
-	popup.style.marginLeft = "18px";
-	popup.style.width = "400px";
-	popup.style.opacity = "0.5";
-
-	popup.innerText = "To get the answer correct, you must input at least one correct English meaning.\nExamples:Prompt: \"emō\" Enter: \"emere, ēmī, emptum: to buy\"\nPrompt: \"finēs\" Enter: \"finium, n pl: territory\"";
-
-	let toggled = false;
-	
-	infoIcon.src = "info.ico";
-	infoIcon.width = "16";
-	infoIcon.height = "16";
-	infoIcon.style.marginBottom = "16px";
-	infoIcon.style.paddingLeft = "4px";
-
-	infoIcon.onclick = function(){
-		if (!toggled){
-			popup.style.visibility = "visible";
-			toggled = true;
+		let toggled = false;
+		
+		infoIcon.onclick = function(){
+			if (!toggled){
+				popup.style.visibility = "visible";
+				toggled = true;
+			}
+			else {
+				popup.style.visibility = "hidden";
+				toggled = false;
+			}
 		}
-		else {
+
+		popup.onclick = function(){
 			popup.style.visibility = "hidden";
 			toggled = false;
 		}
-	}
 
-	popup.onclick = function(){
-		popup.style.visibility = "hidden";
-		toggled = false;
-	}
+		span.appendChild(infoIcon);
+		span.appendChild(popup);
 
-	span.appendChild(infoIcon);
-	span.appendChild(popup);
-
-	return function(){
 		return span;
 	}
-}
 
-function displayReaction(){
-	let reaction = document.createElement("p");
-	reaction.id = "reaction";
+	/*
+	* This function creates the style for the span element
+	* containing the info popup and info icon, for the info
+	* icon, and for the info popup.
+	*/
+	function stylePopup(span, infoIcon, popup){
+		span.style.position = "relative";
+		span.style.cursor = "pointer";
+		span.style.userSelect = "none";
+		span.id = "popupSpan";
 
-	//style
-	reaction.style.marginTop = "32px";
+		popup.style.visibility = "hidden";
+		popup.style.backgroundColor = "#555";
+		popup.style.color = "#fff";
+		popup.style.textAlign = "center";
+		popup.style.borderRadius = "6px";
+		popup.style.padding = "8px 0";
+		popup.style.position = "absolute";
+		popup.style.zIndex = "1";
+		popup.style.bottom = "125%";
+		popup.style.left = "50%";
+		popup.style.marginBottom = "8px";
+		popup.style.marginLeft = "12px";
+		popup.style.width = "400px";
+		popup.style.opacity = "0.5";
 
-	document.body.appendChild(reaction);
-}
+		infoIcon.src = "info.ico";
+		infoIcon.width = "16";
+		infoIcon.height = "16";
+		infoIcon.style.marginBottom = "16px";
+		infoIcon.style.paddingLeft = "4px";
+	}
 
-function displayWordsToStudy(){
-	let wordsToStudy = document.createElement("p");
-	wordsToStudy.id = "shouldStudy";
+	/**
+	* This function creates the parent div element to the
+	* answer input field, the info icon, and the info
+	* popup.
+	**/
+	function createAnswerFieldDiv(answerField, popupSpan){
+		let inputBoxDiv = document.createElement("DIV");
+		inputBoxDiv.appendChild(answerField);
+		inputBoxDiv.appendChild(popupSpan);
+		inputBoxDiv.id = "inputBox";
+		document.body.appendChild(inputBoxDiv);
+	}
 
-	//style
-	wordsToStudy.style.marginTop = "32px";
+	/*
+	* This function creates the p html element that
+	* will contain the text saying whether the last
+	* answer was right or not. 
+	*/
+	function createReaction(){
+		let reaction = document.createElement("p");
+		reaction.id = "reaction";
 
-	document.body.appendChild(wordsToStudy);
-}
+		//style
+		reaction.style.marginTop = "32px";
 
-function createWordsToStudyButton(){
-	let studyWordsButton = createButton("Study these words", "#DE0000", "2px solid #555");
-    document.body.appendChild(studyWordsButton);
+		document.body.appendChild(reaction);
+	}
 
-    //style
-    studyWordsButton.style.display = "none";
-}
+	/*
+	* Creates the html p element that contains the text of incorrect
+	* words after a study list is completed.
+	*/
+	function displayWordsToStudy(){
+		let wordsToStudy = document.createElement("p");
+		wordsToStudy.id = "shouldStudy";
 
-function displayWordsStudying(){
-	let wordsStudying = document.createElement("p");
-	wordsStudying.id = "study";
+		//style
+		wordsToStudy.style.marginTop = "32px";
 
-	document.body.appendChild(wordsStudying);
-}
+		document.body.appendChild(wordsToStudy);
+	}
 
-/**
-* Creates a button HTML element with fixed style and animation attributes.
-* Parameters:
-*   value: the text to be displayed in the button and the button id.
-*   backgroundColor: the color of the button
-* Returns:
-*   The button HTML element
-**/
-function createButton(value, backgroundColor, borderOnHover){
-	//Create button with text
-	var button = document.createElement("BUTTON");
-	var text = document.createTextNode(value);
-    button.appendChild(text);
-    button.id = value;
+	/*
+	* Creates the button that allows the user to study just the words they got wrong.
+	*/
+	function createWordsToStudyButton(){
+		let studyWordsButton = createButton("Study these words", "#DE0000", "2px solid #555");
+	    document.body.appendChild(studyWordsButton);
 
-    //Dynamic button style
-    button.style.backgroundColor = backgroundColor;
+	    //style
+	    studyWordsButton.style.display = "none";
+	}
 
-    //Fixed button style
-    button.style.border = "none";
-    button.style.marginRight = "8px";
-    button.style.color = "white";
-    button.style.height = "32px";
-    button.style.marginTop = "16px";
-    button.style.borderRadius = "20px";
+	/*
+	* Creates the html p element that contains the text of the current
+	* study list if the user wants to study the list.
+	*/
+	function displayWordsStudying(){
+		let wordsStudying = document.createElement("p");
+		wordsStudying.id = "study";
 
-    //Fixed button animation
-    button.onmouseover = function(){
-        button.style.border = borderOnHover;
-        button.style.padding = "2px 4px 3px";
-    };
-    button.onmouseout = function(){
-        button.style.border = "none";
-        button.style.padding = "2px 6px 3px";
-    };
-    button.onfocus = function(){
-    	button.style.outline = "0";
-    };
+		document.body.appendChild(wordsStudying);
+	}
 
-    return button;
-}
+	/**
+	* Creates a button HTML element with fixed style and animation attributes.
+	* Parameters:
+	*   value: the text to be displayed in the button and the button id.
+	*   backgroundColor: the color of the button
+	* Returns:
+	*   The button HTML element
+	**/
+	function createButton(value, backgroundColor, borderOnHover){
+		//Create button with text
+		var button = document.createElement("BUTTON");
+		var text = document.createTextNode(value);
+	    button.appendChild(text);
+	    button.id = value;
 
-/**
-* This function actually processes the input and coordinates a response
-**/
-function runProgram(words)
-{
-    let i = 0;
+	    //Dynamic button style
+	    button.style.backgroundColor = backgroundColor;
 
-    let termsWrong = new Array();
+	    //Fixed button style
+	    button.style.border = "none";
+	    button.style.marginRight = "8px";
+	    button.style.color = "white";
+	    button.style.height = "32px";
+	    button.style.marginTop = "16px";
+	    button.style.borderRadius = "20px";
 
-    removeIWasRightButton();
+	    //Fixed button animation
+	    button.onmouseover = function(){
+	        button.style.border = borderOnHover;
+	        button.style.padding = "2px 4px 3px";
+	    };
+	    button.onmouseout = function(){
+	        button.style.border = "none";
+	        button.style.padding = "2px 6px 3px";
+	    };
+	    button.onfocus = function(){
+	    	button.style.outline = "0";
+	    };
 
-    let entered = false;
+	    return button;
+	}
 
-    getInput(i);
+	/**
+	* This function actually processes the input and coordinates a response
+	**/
+	function runProgram(words)
+	{
+	    let indexOfCurrentWord = 0;	//Index of the current word in the study list
 
-    function getInput(i)
-    {
-        changePrompt(i, true);
-        getInputBox().value = "";
-        getInputBox().onkeydown = function(e){
-        	let key = e.keyCode || e.which;
-        	if (key == 13){
-        		useInput();
-        	}
-        };
+	    let termsWrong = new Array();	//Array of the words the user got wrong
 
-        function useInput()
-        {
-            if (!entered)
-            {
-                let response = getInputBox().value;
-                
-                entered = true;
+	    removeIWasRightButton();
 
-                let definitionWords = getDefinitionWords(i);
+	    let entered = false;	//Whether the function useInput has been entered
 
-                let correctDefinition = false;
+	    getInput(indexOfCurrentWord);
 
-                removeIWasRightButton();
+	    /*
+	    * This function takes the user input from the answer field and evaluates it.
+	    */
+	    function getInput(indexOfCurrentWord)
+	    {
+	        changePrompt(indexOfCurrentWord, true);
+	        answerField.value = "";
+	        answerField.onkeydown = function(e){
+	        	let key = e.keyCode || e.which;
+	        	if (key == 13){
+	        		useInput();
+	        	}
+	        };
 
-                for (let ind = 0; ind < definitionWords.length; ind++)
-                {
-                    if ((response.substring(response.indexOf(":") + 1)).indexOf(definitionWords[ind]) != -1)
-                    {
-                        correctDefinition = true;
-                    }
-                }
-                
-                if (response.substring(0, response.indexOf(":")) == words[i][1].substring(0, words[i][1].indexOf(":")) && correctDefinition)
-                {
-                    document.getElementById("reaction").innerText = "Good job! \n You said: " + words[i][0] + ": " + response;
-                    document.getElementById("reaction").style.color = "green";
-                }
-                else
-                {
-                    document.getElementById("reaction").innerText = "Incorrect. \n You said: " + words[i][0] + ": " + response + "\nCorrect: " + words[i][0] + ": " + words[i][1];
-                    document.getElementById("reaction").style.color = "#DE0000";
-                    termsWrong.push(words[i][0] + ": " + words[i][1]);
+	        /*
+	        * This function evaluates the user input from the answer field.
+	        */
+	        function useInput()
+	        {
+	            if (!entered)
+	            {
+	                let response = answerField.value;
+	                
+	                entered = true;
 
-                    let thisButton = createButton("I was actually right", "green", "2px solid #555");
+	                let definitionWords = getDefinitionWords(indexOfCurrentWord);
 
-                    document.getElementById("inputBox").appendChild(thisButton);
-                    
-                    thisButton.style.marginLeft = "8px";
-                    thisButton.style.marginTop = "0px";
+	                let correctDefinition = false;
 
-                    thisButton.onclick = function(){
-                        termsWrong.pop();
-                        document.getElementById("reaction").innerText = "Good job! \n You said: " + words[i][0] + ": " + response;
-                        document.getElementById("reaction").style.color = "green";
-                        inputBox.removeChild(thisButton);
-                        if (document.getElementById("shouldStudy").innerText.length > 0)
-                      	{
-                            termsWrongToString();
-                        }
-                        else
-                        {
-                        	document.getElementById("Study these words").style.display = "none";
-                        }
-                    };
-                }
-                
-                entered = false;
-                
-                if (i < words.length - 1)
-                {
-                    getInput(i + 1);
-                }
-                else
-                {
-                    changePrompt("You are done.", false);
-                    getInputBox().value = "";
-                    entered = true;
+	                removeIWasRightButton();
 
-                    termsWrongToString();
-                }
+	                for (let ind = 0; ind < definitionWords.length; ind++)
+	                {
+	                    if ((response.substring(response.indexOf(":") + 1)).indexOf(definitionWords[ind]) != -1)
+	                    {
+	                        correctDefinition = true;
+	                    }
+	                }
+	                
+	                if (response.substring(0, response.indexOf(":")) ==
+	                	words[indexOfCurrentWord][1].substring(0, words[indexOfCurrentWord][1].indexOf(":"))
+	                	&& correctDefinition){
 
-                function termsWrongToString()
-                {
-                    let termsWrongString = "";
-                    for (let wrongI = 0; wrongI < termsWrong.length; wrongI++)
-                    {
-                        termsWrongString += termsWrong[wrongI] + "\n";
-                    }
-                    if (termsWrongString.length > 0)
-                    {
-                        document.getElementById("shouldStudy").innerText = "You got the following words wrong: \n \n" + termsWrongString;
-                    
-                        let studyWordsButton = document.getElementById("Study these words");
+	                    document.getElementById("reaction").innerText = "Good job! \n You said: "
+	                    + words[indexOfCurrentWord][0] + ": " + response;
 
-                        studyWordsButton.style.display = "initial";
+	                    document.getElementById("reaction").style.color = "green";
+	                }
+	                else{
+	                    document.getElementById("reaction").innerText = "Incorrect. \n You said: "
+	                    + words[indexOfCurrentWord][0] + ": "
+	                    + response + "\nCorrect: " + words[indexOfCurrentWord][0] + ": "
+	                    + words[indexOfCurrentWord][1];
 
-                        studyWordsButton.onclick = function(){
-					        let termsWrongCorrectFormat = new Array();
+	                    document.getElementById("reaction").style.color = "#DE0000";
+	                    
+	                    termsWrong.push(words[indexOfCurrentWord][0] + ": "
+	                    	+ words[indexOfCurrentWord][1]);
 
-					        for (let i = 0; i < termsWrong.length; i++){
-					            let thisWord = new Array();
-					            thisWord[0] = termsWrong[i].substring(0, termsWrong[i].indexOf(": "));
-					            thisWord[1] = termsWrong[i].substring(termsWrong[i].indexOf(": ") + ": ".length);
-					            termsWrongCorrectFormat.push(thisWord);
-					        }
-					        
-					        currentStudyList = shuffle(termsWrongCorrectFormat);
-					        runProgram(currentStudyList);
+	                    let thisButton = createButton("I was actually right", "green", "2px solid #555");
 
-					        studyWordsButton.style.display = "none";
-					        document.getElementById("reaction").innerText = "";
-					        document.getElementById("shouldStudy").innerText = "";
-					        document.getElementById("study").innerText = "";
-					    };
-                    }
-                    else
-                    {
-                        document.getElementById("shouldStudy").innerText = "Well done. You got no words wrong!"
-                        document.getElementById("Study these words").style.display = "none";
-                    }
-                }    
-            }
-        };
-    }
+	                    document.getElementById("inputBox").appendChild(thisButton);
+	                    
+	                    thisButton.style.marginLeft = "8px";
+	                    thisButton.style.marginTop = "0px";
 
-    function removeIWasRightButton()
-    {
-        if (document.getElementById("I was actually right") != null)
-        {
-            document.getElementById("inputBox").removeChild(document.getElementById("I was actually right"));
-        }
-    }
+	                    thisButton.onclick = function(){
+	                        termsWrong.pop();
+	                        document.getElementById("reaction").innerText = "Good job! \n You said: "
+	                        + words[indexOfCurrentWord][0] + ": " + response;
 
-    /**
-    *   Parses the English definition of the Latin and inserts each parsed word
-    *   of the English into an array.  Returns the array.
-    *
-    *   parameter i: the index of the current vocab in the 2D array called words
-    **/
-    function getDefinitionWords(i)
-    {
-        let correctWords = new Array(); //The array to contain the English words
-        
-        let correctDef = words[i][1].substring((words[i][1].indexOf(":") + 1)); //The full correct English definition
+	                        document.getElementById("reaction").style.color = "green";
+	                        inputBox.removeChild(thisButton);
+	                        if (document.getElementById("shouldStudy").innerText.length > 0)
+	                      	{
+	                            termsWrongToString();
+	                        }
+	                        else
+	                        {
+	                        	document.getElementById("Study these words").style.display = "none";
+	                        }
+	                    };
+	                }
+	                
+	                entered = false;
+	                
+	                if (indexOfCurrentWord < words.length - 1)
+	                {
+	                    getInput(indexOfCurrentWord + 1);
+	                }
+	                else
+	                {
+	                    changePrompt("You are done.", false);
+	                    answerField.value = "";
+	                    entered = true;
 
-        //Cuts out words from right to left until the definition has length 0
-        while (correctDef.length > 0)
-        {
-        	let currentWord;
-            //Handles the case where a comma comes after the word or where the current word is the last
-            if (correctDef.indexOf(",") != -1)
-            {
-                currentWord = correctDef.substring(0, correctDef.indexOf(",")); //The current English word
-                
-                //Removes "to" from before verbs
-                if (currentWord.indexOf(" to") != -1)
-                {
-                    currentWord = currentWord.substring(currentWord.indexOf(" to") + 3);
-                }
+	                    termsWrongToString();
+	                }
 
-                //Removes spaces from before words
-                while (currentWord.indexOf(" ") == 0)
-                {
-                    currentWord = currentWord.substring(1);
-                }
-                correctDef = correctDef.substring(correctDef.indexOf(",") + 1); //Cuts the current word from the definition
-            }
-            else
-            {
-                currentWord = correctDef;   //This is the last word so no splicing is necessary
-                correctDef = "";            //Makes definition of length 0
-                if (currentWord.indexOf(" to") != -1)
-                {
-                    currentWord = currentWord.substring(currentWord.indexOf(" to") + 3);
-                }
+	                /*
+	                * This function creates a single string with all of the study terms the user
+	                * got incorrect, and then displays the string in the field with id
+	                * "shouldStudy".
+	                */
+	                function termsWrongToString()
+	                {
+	                    let termsWrongString = "";
+	                    for (let wrongI = 0; wrongI < termsWrong.length; wrongI++)
+	                    {
+	                        termsWrongString += termsWrong[wrongI] + "\n";
+	                    }
+	                    if (termsWrongString.length > 0)
+	                    {
+	                        document.getElementById("shouldStudy").innerText = "You got the following words wrong: \n \n" + termsWrongString;
+	                    
+	                        let studyWordsButton = document.getElementById("Study these words");
 
-                while (currentWord.indexOf(" ") == 0)
-                {
-                    currentWord = currentWord.substring(1);
-                }
-            } 
-                correctWords.push(currentWord);
-        }
-        return correctWords;
-    }
+	                        studyWordsButton.style.display = "initial";
+
+	                        studyWordsButton.onclick = function(){
+						        let termsWrongCorrectFormat = new Array();
+
+						        for (let ind = 0; ind < termsWrong.length; ind++){
+						            let thisWord = new Array();
+						            thisWord[0] = termsWrong[ind].substring(0, termsWrong[ind].indexOf(": "));
+						            thisWord[1] = termsWrong[ind].substring(termsWrong[ind].indexOf(": ") + ": ".length);
+						            termsWrongCorrectFormat.push(thisWord);
+						        }
+						        
+						        currentStudyList = shuffle(termsWrongCorrectFormat);
+						        runProgram(currentStudyList);
+
+						        studyWordsButton.style.display = "none";
+						        document.getElementById("reaction").innerText = "";
+						        document.getElementById("shouldStudy").innerText = "";
+						        document.getElementById("study").innerText = "";
+						    };
+	                    }
+	                    else
+	                    {
+	                        document.getElementById("shouldStudy").innerText = "Well done. You got no words wrong!"
+	                        document.getElementById("Study these words").style.display = "none";
+	                    }
+	                }    
+	            }
+	        };
+	    }
+
+	    /*
+	    * This function removes the "I was actually right" button from the DOM
+	    */
+	    function removeIWasRightButton()
+	    {
+	        if (document.getElementById("I was actually right") != null)
+	        {
+	            document.getElementById("inputBox").removeChild(document.getElementById("I was actually right"));
+	        }
+	    }
+
+	    /**
+	    *   Parses the English definition of the Latin and inserts each parsed word
+	    *   of the English into an array.  Returns the array.
+	    *
+	    *   parameter i: the index of the current vocab in the 2D array called words
+	    **/
+	    function getDefinitionWords(indexOfCurrentWord)
+	    {
+	        let correctWords = new Array(); //The array to contain the English words
+	        
+	        let correctDef = words[indexOfCurrentWord][1].substring((words[indexOfCurrentWord][1].indexOf(":") + 1)); //The full correct English definition
+
+	        //Cuts out words from right to left until the definition has length 0
+	        while (correctDef.length > 0)
+	        {
+	        	let currentWord;
+	            //Handles the case where a comma comes after the word or where the current word is the last
+	            if (correctDef.indexOf(",") != -1)
+	            {
+	                currentWord = correctDef.substring(0, correctDef.indexOf(",")); //The current English word
+	                
+	                //Removes "to" from before verbs
+	                if (currentWord.indexOf(" to") != -1)
+	                {
+	                    currentWord = currentWord.substring(currentWord.indexOf(" to") + 3);
+	                }
+
+	                //Removes spaces from before words
+	                while (currentWord.indexOf(" ") == 0)
+	                {
+	                    currentWord = currentWord.substring(1);
+	                }
+	                correctDef = correctDef.substring(correctDef.indexOf(",") + 1); //Cuts the current word from the definition
+	            }
+	            else
+	            {
+	                currentWord = correctDef;   //This is the last word so no splicing is necessary
+	                correctDef = "";            //Makes definition of length 0
+	                if (currentWord.indexOf(" to") != -1)
+	                {
+	                    currentWord = currentWord.substring(currentWord.indexOf(" to") + 3);
+	                }
+
+	                while (currentWord.indexOf(" ") == 0)
+	                {
+	                    currentWord = currentWord.substring(1);
+	                }
+	            } 
+	                correctWords.push(currentWord);
+	        }
+	        return correctWords;
+	    }
+	}
 }
 
 /**
@@ -646,7 +979,7 @@ function getStudyList(chapterID)
 	  ["obses", "obsidis, c: hostage; pledge, security"],
 	  ["polliceor", "pollicērī, pollicitus sum: to promise, offer"],
 	  ["queror", "querī, questus sum: to complain, bewail, lament"],
-	  ["ultrō", "voluntarily; besides, moreover"],
+	  ["ultrō", "voluntarily, besides, moreover"],
 	  ["vinculum","vinculī, n: chain"]
 	];
 
@@ -655,7 +988,7 @@ function getStudyList(chapterID)
 	  ["obses", "obsidis, c: hostage; pledge, security"],
 	  ["polliceor", "polliceri, pollicitus sum: to promise, offer"],
 	  ["queror", "queri, questus sum: to complain, bewail, lament"],
-	  ["ultro", "voluntarily; besides, moreover"],
+	  ["ultro", "voluntarily, besides, moreover"],
 	  ["vinculum","vinculi, n: chain"]
 	];
 
@@ -776,7 +1109,7 @@ function getStudyList(chapterID)
 }
 
 /**
-* Returns the current Romanized date in Latin.  Written by Akshay Srivatsan.
+* Returns the current Romanized date in Latin.  Written by Akshay Srivatsan and used with permission.
 **/
 function getRomanDate(){
     var months_accusative = ['', 'Ianuarias', 'Februarias', 'Martias', 'Apriles', 'Maias', 'Iunias', 'Iulias', 'Augustas', 'Septembres', 'Octobres', 'Novembres', 'Decembres', 'Ianuarias']
@@ -844,6 +1177,11 @@ function getRomanDate(){
     return (romanize(romanDate(date)));
 }
 
+/*
+* Parameter: an array
+* Returns: the array with elements shuffled
+* Taken from: https://github.com/Daplie/knuth-shuffle
+*/
 function shuffle(array){
   var currentIndex = array.length, temporaryValue, randomIndex;
 
