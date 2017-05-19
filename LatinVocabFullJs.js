@@ -1,4 +1,4 @@
-//v0.8.0
+//v0.8.0a Stuff to add: restudy the last list, search by contents
 createHead();
 createBody();
 
@@ -976,7 +976,7 @@ function getStudyList(chapterID)
 
 	let bk4ch27 = [
 	  ["arcessō", "arcessere, arcessīvī, arcessītum: to summon, send for, invite"],
-	  ["obses", "obsidis, c: hostage; pledge, security"],
+	  ["obses", "obsidis, c: hostage, pledge, security"],
 	  ["polliceor", "pollicērī, pollicitus sum: to promise, offer"],
 	  ["queror", "querī, questus sum: to complain, bewail, lament"],
 	  ["ultrō", "voluntarily, besides, moreover"],
@@ -985,7 +985,7 @@ function getStudyList(chapterID)
 
 	let bk4ch27SansMacrons = [
 	  ["arcesso", "arcessere, arcessivi, arcessitum: to summon, send for, invite"],
-	  ["obses", "obsidis, c: hostage; pledge, security"],
+	  ["obses", "obsidis, c: hostage, pledge, security"],
 	  ["polliceor", "polliceri, pollicitus sum: to promise, offer"],
 	  ["queror", "queri, questus sum: to complain, bewail, lament"],
 	  ["ultro", "voluntarily, besides, moreover"],
